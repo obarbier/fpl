@@ -24,15 +24,18 @@ class ProtobuffConverter(converters.Factory):
         """
         :return: return content by type
         """
+        msg = cls()
         if  inspect.isclass(cls) and issubclass(cls, Teams):
             response = response.json()
-            msg = cls()
             for k,v in response.items():
                 if k =="teams":
                     for t in v:
                         team = msg.team.add()
                         protosUtils.parse_dict(t,team)
                     return msg
+        else:
+            msg.ParseFromString(response)
+            return msg
 
     @staticmethod
     def is_protocol_buffer_class(cls):
