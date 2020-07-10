@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package fpl;
 
-message team {
+message Team {
     optional int32 code = 1;
     optional int32 draw = 2;
     optional int32 form = 3;
@@ -26,4 +26,10 @@ message team {
     optional int32 pulse_id	= 21;
 
 }
+
+message Teams {
+  repeated Team team = 1;
+}
+
+
 

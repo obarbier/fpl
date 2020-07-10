@@ -12,7 +12,7 @@ API_URLS = {
     "players": "/elements/",
     "player": "/element-summary/{/}/",
     "settings": "/game-settings/",
-    "static": "bootstrap-static",
+    "static": "bootstrap-static/",
     "teams": "/teams/",
     "transfers": "/transfers/",
     "user": "/entry/{/}/",
