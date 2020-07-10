@@ -1,0 +1,2 @@
+set "PROTOS=fpl\protos"
+protoc -I=%PROTOS% --python_out=%PROTOS% %PROTOS%\team.proto 
