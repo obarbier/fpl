@@ -5,8 +5,8 @@ import textwrap
 
 from flask import Flask, send_from_directory, Response
 
-from fpl.Utils.process import exec_cmd
-from fpl.server.ServerRequestHandler import STATIC_PREFIX_ENV_VAR, _add_static_prefix
+from fplsupercharge.Utils.process import exec_cmd
+from fplsupercharge.server.ServerRequestHandler import STATIC_PREFIX_ENV_VAR, _add_static_prefix
 
 REL_STATIC_DIR = "js/build"
 app = Flask(__name__, static_folder=REL_STATIC_DIR)
@@ -38,15 +38,15 @@ def _build_waitress_command(waitress_opts, host, port):
            opts + [
                "--host=%s" % host,
                "--port=%s" % port,
-               "--ident=fpl",
-               "fpl.server:app"
+               "--ident=fplsupercharge",
+               "fplsupercharge.server:app"
            ]
 
 
 def _build_gunicorn_command(gunicorn_opts, host, port, workers):
     bind_address = "%s:%s" % (host, port)
     opts = shlex.split(gunicorn_opts) if gunicorn_opts else []
-    return ["gunicorn"] + opts + ["-b", bind_address, "-w", "%s" % workers, "fpl.server:app"]
+    return ["gunicorn"] + opts + ["-b", bind_address, "-w", "%s" % workers, "fplsupercharge.server:app"]
 
 
 def _run_server(host, port, opts):
