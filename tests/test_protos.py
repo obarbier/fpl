@@ -1,10 +1,12 @@
+"""Tests for `fplsupercharge.protos` package."""
+
 import unittest
-from team_pb2 import team
+from fplsupercharge.protos.team_pb2 import team
 
 
-class Teamtest(unittest.TestCase):
+class TestProtos(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(Teamtest, self).__init__(*args, **kwargs)
+        super(TestProtos, self).__init__(*args, **kwargs)
         self.teamObject = team()
         self.teamObject.code = 3
         self.teamObject.draw = 0
