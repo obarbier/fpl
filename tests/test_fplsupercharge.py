@@ -21,7 +21,7 @@ class TestFplsupercharge(unittest.TestCase):
         """Tear down test fixtures, if any."""
 
     def test_init_and_teardown(self):
-        """Test something."""
+        """test_init_and_teardown."""
         runner = CliRunner()
         args = "\n".join(["test@test.com","password","password","1","1","1","0.0.0.0:1234","password", "password" ,""])
         help_result = runner.invoke(cli.init, input =args)
@@ -39,7 +39,6 @@ class TestFplsupercharge(unittest.TestCase):
         runner = CliRunner()
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
-        # assert '--help  Show this message and exit.' in help_result.output
 if __name__ == '__main__':
     unittest.main()
     
