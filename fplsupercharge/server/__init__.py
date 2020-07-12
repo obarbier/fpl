@@ -6,7 +6,7 @@ import textwrap
 from flask import Flask, send_from_directory, Response
 
 from fplsupercharge.Utils.process import exec_cmd
-from fplsupercharge.server.ServerRequestHandler import STATIC_PREFIX_ENV_VAR, _add_static_prefix
+from fplsupercharge.server.ServerRequestHandler import _add_static_prefix
 
 REL_STATIC_DIR = "js/build"
 app = Flask(__name__, static_folder=REL_STATIC_DIR)
@@ -14,7 +14,8 @@ STATIC_DIR = os.path.join(app.root_path, REL_STATIC_DIR + "/static")
 INDEX_DIR = os.path.join(app.root_path, REL_STATIC_DIR)
 
 
-# CSS/JS resources will be made to e.g. /static/index.css and we can handle them here.
+# CSS/JS resources will be made to /static/index.css and we can handle
+# them here.
 @app.route(_add_static_prefix('/static/<path:path>'))
 def serve_static_file(path):
     return send_from_directory(STATIC_DIR, path)
@@ -35,18 +36,24 @@ def serve():
 def _build_waitress_command(waitress_opts, host, port):
     opts = shlex.split(waitress_opts) if waitress_opts else []
     return ['waitress-serve'] + \
-           opts + [
-               "--host=%s" % host,
-               "--port=%s" % port,
-               "--ident=fplsupercharge",
-               "fplsupercharge.server:app"
-           ]
+        opts + [
+        "--host=%s" % host,
+        "--port=%s" % port,
+        "--ident=fplsupercharge",
+        "fplsupercharge.server:app"
+    ]
 
 
 def _build_gunicorn_command(gunicorn_opts, host, port, workers):
     bind_address = "%s:%s" % (host, port)
     opts = shlex.split(gunicorn_opts) if gunicorn_opts else []
-    return ["gunicorn"] + opts + ["-b", bind_address, "-w", "%s" % workers, "fplsupercharge.server:app"]
+    return ["gunicorn"] + \
+        opts + [
+            "-b",
+            bind_address,
+            "-w",
+            "%s" % workers,
+            "fplsupercharge.server:app"]
 
 
 def _run_server(host, port, opts):

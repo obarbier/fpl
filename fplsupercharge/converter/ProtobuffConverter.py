@@ -1,14 +1,14 @@
 # Static imports
 import functools
 import inspect
-import  json
 # Third party imports
 from google.protobuf import message
-from uplink import converters, returns, json, install
-#local imports
-from fpl.converter import  json_options , helpers
-from fpl.protos.team_pb2 import Teams
-from fpl.Utils import protosUtils
+from uplink import converters, returns, json
+# local imports
+from fplsupercharge.converter import json_options, helpers
+from fplsupercharge.protos.team_pb2 import Teams
+from fplsupercharge.Utils import protosUtils
+
 
 class ProtobuffConverter(converters.Factory):
     __DECODING_STRATEGIES = {
@@ -25,13 +25,13 @@ class ProtobuffConverter(converters.Factory):
         :return: return content by type
         """
         msg = cls()
-        if  inspect.isclass(cls) and issubclass(cls, Teams):
+        if inspect.isclass(cls) and issubclass(cls, Teams):
             response = response.json()
-            for k,v in response.items():
-                if k =="teams":
+            for k, v in response.items():
+                if k == "teams":
                     for t in v:
                         team = msg.team.add()
-                        protosUtils.parse_dict(t,team)
+                        protosUtils.parse_dict(t, team)
                     return msg
         else:
             msg.ParseFromString(response)
@@ -74,10 +74,11 @@ class ProtobuffConverter(converters.Factory):
             # Return default callable that can decode Protobuf message
             # from response content.
             def converter(response):
-                msg = self._get_content_by_type(cls,response)
+                msg = self._get_content_by_type(cls, response)
                 return msg
 
             return converter
+
     def create_request_body_converter(self, cls, request_definition):
         try:
             return self._get_strategy(

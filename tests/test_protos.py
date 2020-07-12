@@ -7,7 +7,7 @@ from fplsupercharge.protos.team_pb2 import Team
 class TestProtos(unittest.TestCase):
 
     def setUp(self):
-        """Set up test fixtures, if any."""   
+        """Set up test fixtures, if any."""
         self.teamObject = Team()
         self.teamObject.code = 3
         self.teamObject.draw = 0
@@ -50,7 +50,7 @@ class TestProtos(unittest.TestCase):
         self.teamObject.strength_attack_away = 1170
         self.teamObject.strength_defence_home = 1150
         self.teamObject.strength_defence_away = 1200
-        self.teamObject.pulse_id = 1             
+        self.teamObject.pulse_id = 1
 
     def tearDown(self):
         """Tear down test fixtures, if any."""
@@ -58,9 +58,8 @@ class TestProtos(unittest.TestCase):
     def test_initialize(self):
         """Test_initialize Protos Teams."""
         self.assertTrue(self.teamObject.IsInitialized())
-        self.assertTrue(isinstance(self.teamObject, Team))        
+        self.assertTrue(isinstance(self.teamObject, Team))
 
 
 if __name__ == '__main__':
-    unittest.main()         
-
+    unittest.main()

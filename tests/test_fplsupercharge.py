@@ -11,6 +11,7 @@ from click.testing import CliRunner
 from fplsupercharge import cli
 from fplsupercharge.Utils.iniFileConstant import SAVE_TEMPLATE, FILE_NAME
 
+
 class TestFplsupercharge(unittest.TestCase):
     """Tests for `fplsupercharge` package."""
 
@@ -23,11 +24,13 @@ class TestFplsupercharge(unittest.TestCase):
     def test_init_and_teardown(self):
         """test_init_and_teardown."""
         runner = CliRunner()
-        args = "\n".join(["test@test.com","password","password","1","1","1","0.0.0.0:1234","password", "password" ,""])
-        help_result = runner.invoke(cli.init, input =args)
+        args = "\n".join(["test@test.com", "password", "password",
+                          "1", "1", "1", "0.0.0.0:1234", "password",
+                          "password", ""])
+        help_result = runner.invoke(cli.init, input=args)
         assert os.path.exists(SAVE_TEMPLATE.format(FILE_NAME)) == 1
         assert help_result.exit_code == 0
-        #FIXME: Teardown
+        # FIXME: Teardown
         # runner = CliRunner()
         # help_result = runner.invoke(cli.teardown, input ="\n")
         # print(help_result.output)
@@ -39,6 +42,7 @@ class TestFplsupercharge(unittest.TestCase):
         runner = CliRunner()
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
+
+
 if __name__ == '__main__':
     unittest.main()
-    
