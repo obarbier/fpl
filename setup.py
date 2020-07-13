@@ -30,7 +30,6 @@ requirements = []
 
 setup_requirements = ["Click>=7.0",
                       "Flask",
-                      "itsdangerous>=0.24",
                       "uplink>=0.9.1",
                       "gunicorn==20.0.4",
                         'waitress; platform_system == "Windows"',
