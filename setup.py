@@ -13,6 +13,8 @@ def package_files(directory):
         for filename in filenames:
             paths.append(os.path.join('..', path, filename))
     return paths
+
+
 js_files = package_files('fplsupercharge/server/js/build')
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -21,19 +23,25 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = []
-# FIXME: change the inport statement 
-with open('requirements_dev.txt') as lines:
-    requirements=[line.rstrip() for line in lines]
+# FIXME: change the inport statement
+# with open('requirements_dev.txt') as lines:
+#     requirements = [line.rstrip() for line in lines]
 
 
-
-setup_requirements = [ ]
-
-test_requirements = [ ]
+setup_requirements = ["Click>=7.0",
+                      "Flask",
+                      "uplink>=0.9.1",
+                      "gunicorn==20.0.4",
+                        'waitress; platform_system == "Windows"',
+                        'gunicorn; platform_system != "Windows"',
+                      "protobuf==3.12.2"
+                      ]
+# FIXME: change author email
+test_requirements = [ "tox==3.14.0", "flake8==3.7.8"]
 
 setup(
     author="Olivier Cedric Barbier",
-    author_email='obarbier13@gmai.com',
+    author_email='obarbier13@gmail.com',
     python_requires='>=3.5',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

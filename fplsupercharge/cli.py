@@ -3,9 +3,7 @@
 
 import sys
 import click
-import json
 import os
-import sys
 import shutil
 import logging
 import configparser
@@ -32,13 +30,13 @@ def main(args=None):
 @cli_args.DATABASEURL
 @cli_args.DATABASEPASSWORD
 def init(username, password, initype, refresh, dbtype, dburl, dbpass):
-    """User metada to be save save 
+    """User metada to be save
     : params
     USERNAME     : Username need to Login to FPL
     PASSWORD     : Password need to Login to FPL
     INITYPE     : where to save data
     REFRESH_DATA : how often we will update record
-    databaseType: persistence database type 
+    databaseType: persistence database type
     databaseUri: persistant datapase URL"""
     if click.confirm('Do you want to continue?', default=True):
         try:
@@ -60,10 +58,12 @@ def init(username, password, initype, refresh, dbtype, dburl, dbpass):
                 1), 'dburl', dburl)
             config.set(iniFileConstant.SECTION.get(
                 1), 'dbpass', dbpass)
-            with open(iniFileConstant.SAVE_TEMPLATE.format(iniFileConstant.FILE_NAME) , 'w') as configfile:
+            with open(iniFileConstant.SAVE_TEMPLATE.format(
+                    iniFileConstant.FILE_NAME), 'w') as configfile:
                 config.write(configfile)
             # FIXME: ENCODE/ENCRYPT using key
             print(iniFileConstant.INI_CREATION_MESSAGE_SUCCESS)
+
 
 @main.command()
 def teardown():
@@ -73,7 +73,7 @@ def teardown():
         try:
             shutil.rmtree(iniFileConstant.TEMP_FILE_DIR)
         except Exception:
-            print(iniFileConstant.TEMP_DELETE_MESSAGE_FAILED, Exception.message)
+            print(iniFileConstant.TEMP_DELETE_MESSAGE_FAILED)
         else:
             print(iniFileConstant.TEMP_DELETE_MESSAGE_SUCCESS)
 
@@ -86,9 +86,11 @@ def ui(port, host):
     try:
         _run_server(host, port, None)
     except ShellCommandException:
-        print("Running the fpl server failed. Please see the logs above for details.")
+        print("Running the fpl server failed.")
         sys.exit(1)
 # TODO: As a user application/db need to be update
+
+
 @main.command()
 def refreshUpdate():
     pass
