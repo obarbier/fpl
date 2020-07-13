@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Olivier Cedric Barbier <obarbier13@gmai.com>
+* Olivier Cedric Barbier <obarbier13@gmail.com>
 
 Contributors
 ------------
