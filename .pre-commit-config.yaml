@@ -2,4 +2,5 @@
     rev: master
     hooks:
     -   id: branch-name-convention    
-        args: ["-h"]
+        args: ["-p=test"]
+        verbose: true
