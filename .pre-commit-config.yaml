@@ -1,0 +1,5 @@
+-   repo: https://github.com/obarbier/pre-commit-hooks
+    rev: master
+    hooks:
+    -   id: branch-name-convention    
+        args: ["-h"]
