@@ -2,5 +2,5 @@
     rev: master
     hooks:
     -   id: branch-name-convention    
-        args: ["-p=dev"]
+        args: ["-p=^(dev|master|release|((feature|bigfeature|task|bugfix|hotfix)\/[A-Z]+-[0-9]+_[A-Z]+_.+))$"]
         verbose: true
