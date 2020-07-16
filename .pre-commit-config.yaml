@@ -1,0 +1,6 @@
+-   repo: https://github.com/obarbier/pre-commit-hooks
+    rev: master
+    hooks:
+    -   id: branch-name-convention    
+        args: ["-p=^(feature|bug|hotfix)(\/|-)"]
+        verbose: true
