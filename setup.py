@@ -28,8 +28,8 @@ requirements = []
 #     requirements = [line.rstrip() for line in lines]
 
 
-setup_requirements = ["Click>=7.0",
-                      "Flask",
+setup_requirements = ["click>=7.0",
+                      "flask",
                       "uplink>=0.9.1",
                       "gunicorn==20.0.4",
                         'waitress; platform_system == "Windows"',
