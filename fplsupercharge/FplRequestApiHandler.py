@@ -15,7 +15,7 @@ class FplRequestApiHandler(FPL):
         
 
 async def main():
-    fplRequestApiHandler = await FplRequestApiHandler.createSession(email="obarbier13@gmail.com",password="<>")
+    fplRequestApiHandler = await FplRequestApiHandler.createSession(email="",password="<>")
     print(fplRequestApiHandler.get_team(1))
 
 
