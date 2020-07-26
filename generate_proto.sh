@@ -7,9 +7,11 @@
 #     sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
 #     rm -f $PROTOC_ZIP
 # fi
+export PATH=$PATH:/home/obarbier/Downloads/protoc-gen-grpc-web
 PROTOS="fplsupercharge/protos"
+PROTOS_JS="fplsupercharge/server/js/src"
 protoc -I="$PROTOS" \
     --python_out="$PROTOS" \
-    "$PROTOS"/team.proto \
-    "$PROTOS"/apiServices.proto \
-    "$PROTOS"/scalapb/scalapb.proto
+    --js_out=import_style=commonjs:"$PROTOS_JS" \
+    --grpc-web_out=import_style=commonjs,mode=grpcwebtext:"$PROTOS_JS" \
+    "$PROTOS"/apiServices.proto

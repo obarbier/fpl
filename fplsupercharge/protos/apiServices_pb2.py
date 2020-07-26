@@ -14,18 +14,16 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
-from .scalapb import scalapb_pb2 as scalapb_dot_scalapb__pb2
-from . import team_pb2 as team__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='apiServices.proto',
   package='fplsupercharge',
   syntax='proto2',
-  serialized_options=b'\220\001\001\342?\002\020\001',
-  serialized_pb=b'\n\x11\x61piServices.proto\x12\x0e\x66plsupercharge\x1a google/protobuf/descriptor.proto\x1a\x15scalapb/scalapb.proto\x1a\nteam.proto\"]\n\x0cHttpEndpoint\x12\x14\n\x06method\x18\x01 \x01(\t:\x04POST\x12\x0c\n\x04path\x18\x02 \x01(\t\x12)\n\x05since\x18\x03 \x01(\x0b\x32\x1a.fplsupercharge.ApiVersion\"*\n\nApiVersion\x12\r\n\x05major\x18\x01 \x01(\x05\x12\r\n\x05minor\x18\x02 \x01(\x05\"=\n\nRpcOptions\x12/\n\tendpoints\x18\x01 \x03(\x0b\x32\x1c.fplsupercharge.HttpEndpoint\"=\n\tListTeams\x1a\x30\n\x08Response\x12$\n\x05teams\x18\x01 \x01(\x0b\x32\x15.fplsupercharge.Teams2|\n\x0b\x41piServices\x12m\n\tlistTeams\x12\x19.fplsupercharge.ListTeams\x1a\".fplsupercharge.ListTeams.Response\"!\xf2\x86\x19\x1d\n\x1b\n\x03GET\x12\x0e/fpl/listTeams\x1a\x04\x08\x02\x10\x00:I\n\x03rpc\x12\x1e.google.protobuf.MethodOptions\x18\xee\x90\x03 \x01(\x0b\x32\x1a.fplsupercharge.RpcOptionsB\x08\x90\x01\x01\xe2?\x02\x10\x01'
+  serialized_options=b'\220\001\001',
+  serialized_pb=b'\n\x11\x61piServices.proto\x12\x0e\x66plsupercharge\x1a google/protobuf/descriptor.proto\"]\n\x0cHttpEndpoint\x12\x14\n\x06method\x18\x01 \x01(\t:\x04POST\x12\x0c\n\x04path\x18\x02 \x01(\t\x12)\n\x05since\x18\x03 \x01(\x0b\x32\x1a.fplsupercharge.ApiVersion\"*\n\nApiVersion\x12\r\n\x05major\x18\x01 \x01(\x05\x12\r\n\x05minor\x18\x02 \x01(\x05\"=\n\nRpcOptions\x12/\n\tendpoints\x18\x01 \x03(\x0b\x32\x1c.fplsupercharge.HttpEndpoint\"\xb3\x03\n\x04Team\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0c\n\x04\x64raw\x18\x02 \x01(\x05\x12\x0c\n\x04\x66orm\x18\x03 \x01(\x05\x12\n\n\x02id\x18\x04 \x01(\x05\x12\x0c\n\x04loss\x18\x05 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x0e\n\x06played\x18\x07 \x01(\x05\x12\x0e\n\x06points\x18\x08 \x01(\x05\x12\x10\n\x08position\x18\t \x01(\x05\x12\x12\n\nshort_name\x18\n \x01(\t\x12\x10\n\x08strength\x18\x0b \x01(\x05\x12\x15\n\rteam_division\x18\x0c \x01(\x05\x12\x13\n\x0bunavailable\x18\r \x01(\x08\x12\x0b\n\x03win\x18\x0e \x01(\x05\x12\x1d\n\x15strength_overall_home\x18\x0f \x01(\x05\x12\x1d\n\x15strength_overall_away\x18\x10 \x01(\x05\x12\x1c\n\x14strength_attack_home\x18\x11 \x01(\x05\x12\x1c\n\x14strength_attack_away\x18\x12 \x01(\x05\x12\x1d\n\x15strength_defence_home\x18\x13 \x01(\x05\x12\x1d\n\x15strength_defence_away\x18\x14 \x01(\x05\x12\x10\n\x08pulse_id\x18\x15 \x01(\x05\"+\n\x05Teams\x12\"\n\x04team\x18\x01 \x03(\x0b\x32\x14.fplsupercharge.Team\"=\n\tListTeams\x1a\x30\n\x08Response\x12$\n\x05teams\x18\x01 \x01(\x0b\x32\x15.fplsupercharge.Teams2|\n\x0b\x41piServices\x12m\n\tlistTeams\x12\x19.fplsupercharge.ListTeams\x1a\".fplsupercharge.ListTeams.Response\"!\xf2\x86\x19\x1d\n\x1b\n\x03GET\x12\x0e/fpl/listTeams\x1a\x04\x08\x02\x10\x00:I\n\x03rpc\x12\x1e.google.protobuf.MethodOptions\x18\xee\x90\x03 \x01(\x0b\x32\x1a.fplsupercharge.RpcOptionsB\x03\x90\x01\x01'
   ,
-  dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,scalapb_dot_scalapb__pb2.DESCRIPTOR,team__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 
 
 RPC_FIELD_NUMBER = 51310
@@ -78,8 +76,8 @@ _HTTPENDPOINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=106,
-  serialized_end=199,
+  serialized_start=71,
+  serialized_end=164,
 )
 
 
@@ -116,8 +114,8 @@ _APIVERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=201,
-  serialized_end=243,
+  serialized_start=166,
+  serialized_end=208,
 )
 
 
@@ -147,8 +145,210 @@ _RPCOPTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=245,
-  serialized_end=306,
+  serialized_start=210,
+  serialized_end=271,
+)
+
+
+_TEAM = _descriptor.Descriptor(
+  name='Team',
+  full_name='fplsupercharge.Team',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='fplsupercharge.Team.code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='draw', full_name='fplsupercharge.Team.draw', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='form', full_name='fplsupercharge.Team.form', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='fplsupercharge.Team.id', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='loss', full_name='fplsupercharge.Team.loss', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='fplsupercharge.Team.name', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='played', full_name='fplsupercharge.Team.played', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='points', full_name='fplsupercharge.Team.points', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='position', full_name='fplsupercharge.Team.position', index=8,
+      number=9, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='short_name', full_name='fplsupercharge.Team.short_name', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength', full_name='fplsupercharge.Team.strength', index=10,
+      number=11, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='team_division', full_name='fplsupercharge.Team.team_division', index=11,
+      number=12, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='unavailable', full_name='fplsupercharge.Team.unavailable', index=12,
+      number=13, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='win', full_name='fplsupercharge.Team.win', index=13,
+      number=14, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_overall_home', full_name='fplsupercharge.Team.strength_overall_home', index=14,
+      number=15, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_overall_away', full_name='fplsupercharge.Team.strength_overall_away', index=15,
+      number=16, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_attack_home', full_name='fplsupercharge.Team.strength_attack_home', index=16,
+      number=17, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_attack_away', full_name='fplsupercharge.Team.strength_attack_away', index=17,
+      number=18, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_defence_home', full_name='fplsupercharge.Team.strength_defence_home', index=18,
+      number=19, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='strength_defence_away', full_name='fplsupercharge.Team.strength_defence_away', index=19,
+      number=20, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pulse_id', full_name='fplsupercharge.Team.pulse_id', index=20,
+      number=21, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=274,
+  serialized_end=709,
+)
+
+
+_TEAMS = _descriptor.Descriptor(
+  name='Teams',
+  full_name='fplsupercharge.Teams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='team', full_name='fplsupercharge.Teams.team', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=711,
+  serialized_end=754,
 )
 
 
@@ -178,8 +378,8 @@ _LISTTEAMS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=321,
-  serialized_end=369,
+  serialized_start=769,
+  serialized_end=817,
 )
 
 _LISTTEAMS = _descriptor.Descriptor(
@@ -201,17 +401,20 @@ _LISTTEAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=308,
-  serialized_end=369,
+  serialized_start=756,
+  serialized_end=817,
 )
 
 _HTTPENDPOINT.fields_by_name['since'].message_type = _APIVERSION
 _RPCOPTIONS.fields_by_name['endpoints'].message_type = _HTTPENDPOINT
-_LISTTEAMS_RESPONSE.fields_by_name['teams'].message_type = team__pb2._TEAMS
+_TEAMS.fields_by_name['team'].message_type = _TEAM
+_LISTTEAMS_RESPONSE.fields_by_name['teams'].message_type = _TEAMS
 _LISTTEAMS_RESPONSE.containing_type = _LISTTEAMS
 DESCRIPTOR.message_types_by_name['HttpEndpoint'] = _HTTPENDPOINT
 DESCRIPTOR.message_types_by_name['ApiVersion'] = _APIVERSION
 DESCRIPTOR.message_types_by_name['RpcOptions'] = _RPCOPTIONS
+DESCRIPTOR.message_types_by_name['Team'] = _TEAM
+DESCRIPTOR.message_types_by_name['Teams'] = _TEAMS
 DESCRIPTOR.message_types_by_name['ListTeams'] = _LISTTEAMS
 DESCRIPTOR.extensions_by_name['rpc'] = rpc
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -236,6 +439,20 @@ RpcOptions = _reflection.GeneratedProtocolMessageType('RpcOptions', (_message.Me
   # @@protoc_insertion_point(class_scope:fplsupercharge.RpcOptions)
   })
 _sym_db.RegisterMessage(RpcOptions)
+
+Team = _reflection.GeneratedProtocolMessageType('Team', (_message.Message,), {
+  'DESCRIPTOR' : _TEAM,
+  '__module__' : 'apiServices_pb2'
+  # @@protoc_insertion_point(class_scope:fplsupercharge.Team)
+  })
+_sym_db.RegisterMessage(Team)
+
+Teams = _reflection.GeneratedProtocolMessageType('Teams', (_message.Message,), {
+  'DESCRIPTOR' : _TEAMS,
+  '__module__' : 'apiServices_pb2'
+  # @@protoc_insertion_point(class_scope:fplsupercharge.Teams)
+  })
+_sym_db.RegisterMessage(Teams)
 
 ListTeams = _reflection.GeneratedProtocolMessageType('ListTeams', (_message.Message,), {
 
@@ -263,8 +480,8 @@ _APISERVICES = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=371,
-  serialized_end=495,
+  serialized_start=819,
+  serialized_end=943,
   methods=[
   _descriptor.MethodDescriptor(
     name='listTeams',

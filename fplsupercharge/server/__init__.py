@@ -2,8 +2,9 @@ import sys
 import os
 import shlex
 import textwrap
+import asyncio
 
-from flask import Flask, send_from_directory, Response, request
+from flask import Flask, session, send_from_directory, Response, request
 
 from fplsupercharge.Utils.process import exec_cmd
 from fplsupercharge.server.ServerRequestHandler import _add_static_prefix
@@ -14,6 +15,7 @@ from fplsupercharge.converter.ProtobuffConverter import ProtobuffConverter
 from fplsupercharge.FplRequestApiHandler import FplRequestApiHandler
 
 REL_STATIC_DIR = "js/build"
+loop = asyncio.get_event_loop()
 app = Flask(__name__, static_folder=REL_STATIC_DIR)
 STATIC_DIR = os.path.join(app.root_path, REL_STATIC_DIR + "/static")
 INDEX_DIR = os.path.join(app.root_path, REL_STATIC_DIR)
@@ -25,38 +27,13 @@ def _not_implemented():
     return response
 
 
-# def _get_request_message(request_message, flask_request=request):
-#     if flask_request.method == 'GET' and len(flask_request.query_string) > 0:
-#         # This is a hack to make arrays of length 1 work with the parser.
-#         # for example experiment_ids%5B%5D=0 should be parsed to {experiment_ids: [0]}
-#         # but it gets parsed to {experiment_ids: 0}
-#         # but it doesn't. However, experiment_ids%5B0%5D=0 will get parsed to the right
-#         # result.
-#         query_string = re.sub('%5B%5D', '%5B0%5D',
-#                               flask_request.query_string.decode("utf-8"))
-#         request_dict = parser.parse(query_string, normalized=True)
-#         # Convert atomic values of repeated fields to lists before calling protobuf deserialization.
-#         # Context: We parse the parameter string into a dictionary outside of protobuf since
-#         # protobuf does not know how to read the query parameters directly. The query parser above
-#         # has no type information and hence any parameter that occurs exactly once is parsed as an
-#         # atomic value. Since protobuf requires that the values of repeated fields are lists,
-#         # deserialization will fail unless we do the fix below.
-#         for field in request_message.DESCRIPTOR.fields:
-#             if (field.label == descriptor.FieldDescriptor.LABEL_REPEATED
-#                     and field.name in request_dict):
-#                 if not isinstance(request_dict[field.name], list):
-#                     request_dict[field.name] = [request_dict[field.name]]
-#         parse_dict(request_dict, request_message)
-#         return request_message
-
-
 def _listTeams():
-    fplRequestApiHandler = FplRequestApiHandler(
-            base_url=API_BASE_URL, converter=ProtobuffConverter())
-    response_message = ListTeams.Response()
-    response_message = fplRequestApiHandler.get_teams()
-    response = Response(mimetype='application/json')
-    response.set_data(message_to_json(response_message))
+    fplRequestApiHandler = FplRequestApiHandler()
+    
+    # response_message = ListTeams.Response()
+    # response_message = fplRequestApiHandler.get_teams()
+    # response = Response(mimetype='application/json')
+    # response.set_data(message_to_json(response_message))
     return response
 
 

@@ -3,12 +3,7 @@ syntax = "proto2";
 package fplsupercharge;
 
 import "google/protobuf/descriptor.proto";
-import "scalapb/scalapb.proto";
-import "team.proto";
 option py_generic_services = true;
-option (scalapb.options) = {
-  flat_package: true,
-};
 message HttpEndpoint {
     // HTTP method like POST or GET.
     optional string method = 1 [default = "POST"];
@@ -53,6 +48,35 @@ message HttpEndpoint {
   }
   }
   //
+  message Team {
+    optional int32 code = 1;
+    optional int32 draw = 2;
+    optional int32 form = 3;
+    optional int32 id   = 4;
+    optional int32 loss	= 5;
+    optional string name = 6;
+    optional int32 played = 7;
+    optional int32 points = 8;
+    optional int32 position	= 9;
+    optional string short_name = 10;
+    optional int32 strength	= 11;
+    optional int32 team_division = 12;
+    optional bool unavailable =	13;
+    optional int32 win = 14;
+    optional int32 strength_overall_home = 15;
+    optional int32 strength_overall_away = 16;
+    optional int32 strength_attack_home	= 17;
+    optional int32 strength_attack_away	= 18;
+    optional int32 strength_defence_home =19;
+    optional int32 strength_defence_away = 20;
+    optional int32 pulse_id	= 21;
+
+}
+
+message Teams {
+  repeated Team team = 1;
+}
+
   message ListTeams {
   
     message Response {
