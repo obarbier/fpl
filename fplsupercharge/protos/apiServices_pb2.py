@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='fplsupercharge',
   syntax='proto2',
   serialized_options=b'\220\001\001',
-  serialized_pb=b'\n\x11\x61piServices.proto\x12\x0e\x66plsupercharge\x1a google/protobuf/descriptor.proto\"]\n\x0cHttpEndpoint\x12\x14\n\x06method\x18\x01 \x01(\t:\x04POST\x12\x0c\n\x04path\x18\x02 \x01(\t\x12)\n\x05since\x18\x03 \x01(\x0b\x32\x1a.fplsupercharge.ApiVersion\"*\n\nApiVersion\x12\r\n\x05major\x18\x01 \x01(\x05\x12\r\n\x05minor\x18\x02 \x01(\x05\"=\n\nRpcOptions\x12/\n\tendpoints\x18\x01 \x03(\x0b\x32\x1c.fplsupercharge.HttpEndpoint\"\xb3\x03\n\x04Team\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0c\n\x04\x64raw\x18\x02 \x01(\x05\x12\x0c\n\x04\x66orm\x18\x03 \x01(\x05\x12\n\n\x02id\x18\x04 \x01(\x05\x12\x0c\n\x04loss\x18\x05 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x0e\n\x06played\x18\x07 \x01(\x05\x12\x0e\n\x06points\x18\x08 \x01(\x05\x12\x10\n\x08position\x18\t \x01(\x05\x12\x12\n\nshort_name\x18\n \x01(\t\x12\x10\n\x08strength\x18\x0b \x01(\x05\x12\x15\n\rteam_division\x18\x0c \x01(\x05\x12\x13\n\x0bunavailable\x18\r \x01(\x08\x12\x0b\n\x03win\x18\x0e \x01(\x05\x12\x1d\n\x15strength_overall_home\x18\x0f \x01(\x05\x12\x1d\n\x15strength_overall_away\x18\x10 \x01(\x05\x12\x1c\n\x14strength_attack_home\x18\x11 \x01(\x05\x12\x1c\n\x14strength_attack_away\x18\x12 \x01(\x05\x12\x1d\n\x15strength_defence_home\x18\x13 \x01(\x05\x12\x1d\n\x15strength_defence_away\x18\x14 \x01(\x05\x12\x10\n\x08pulse_id\x18\x15 \x01(\x05\"+\n\x05Teams\x12\"\n\x04team\x18\x01 \x03(\x0b\x32\x14.fplsupercharge.Team\"=\n\tListTeams\x1a\x30\n\x08Response\x12$\n\x05teams\x18\x01 \x01(\x0b\x32\x15.fplsupercharge.Teams2|\n\x0b\x41piServices\x12m\n\tlistTeams\x12\x19.fplsupercharge.ListTeams\x1a\".fplsupercharge.ListTeams.Response\"!\xf2\x86\x19\x1d\n\x1b\n\x03GET\x12\x0e/fpl/listTeams\x1a\x04\x08\x02\x10\x00:I\n\x03rpc\x12\x1e.google.protobuf.MethodOptions\x18\xee\x90\x03 \x01(\x0b\x32\x1a.fplsupercharge.RpcOptionsB\x03\x90\x01\x01'
+  serialized_pb=b'\n\x11\x61piServices.proto\x12\x0e\x66plsupercharge\x1a google/protobuf/descriptor.proto\"]\n\x0cHttpEndpoint\x12\x14\n\x06method\x18\x01 \x01(\t:\x04POST\x12\x0c\n\x04path\x18\x02 \x01(\t\x12)\n\x05since\x18\x03 \x01(\x0b\x32\x1a.fplsupercharge.ApiVersion\"*\n\nApiVersion\x12\r\n\x05major\x18\x01 \x01(\x05\x12\r\n\x05minor\x18\x02 \x01(\x05\"=\n\nRpcOptions\x12/\n\tendpoints\x18\x01 \x03(\x0b\x32\x1c.fplsupercharge.HttpEndpoint\"\xb3\x03\n\x04Team\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0c\n\x04\x64raw\x18\x02 \x01(\x05\x12\x0c\n\x04\x66orm\x18\x03 \x01(\x05\x12\n\n\x02id\x18\x04 \x01(\x05\x12\x0c\n\x04loss\x18\x05 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x0e\n\x06played\x18\x07 \x01(\x05\x12\x0e\n\x06points\x18\x08 \x01(\x05\x12\x10\n\x08position\x18\t \x01(\x05\x12\x12\n\nshort_name\x18\n \x01(\t\x12\x10\n\x08strength\x18\x0b \x01(\x05\x12\x15\n\rteam_division\x18\x0c \x01(\x05\x12\x13\n\x0bunavailable\x18\r \x01(\x08\x12\x0b\n\x03win\x18\x0e \x01(\x05\x12\x1d\n\x15strength_overall_home\x18\x0f \x01(\x05\x12\x1d\n\x15strength_overall_away\x18\x10 \x01(\x05\x12\x1c\n\x14strength_attack_home\x18\x11 \x01(\x05\x12\x1c\n\x14strength_attack_away\x18\x12 \x01(\x05\x12\x1d\n\x15strength_defence_home\x18\x13 \x01(\x05\x12\x1d\n\x15strength_defence_away\x18\x14 \x01(\x05\x12\x10\n\x08pulse_id\x18\x15 \x01(\x05\"+\n\x05Teams\x12\"\n\x04team\x18\x01 \x03(\x0b\x32\x14.fplsupercharge.Team\"M\n\nColumnDefs\x12\x12\n\nheaderName\x18\x01 \x01(\t\x12\r\n\x05\x66ield\x18\x02 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x03(\t\"n\n\tListTeams\x1a\x61\n\x08Response\x12.\n\ncolumnDefs\x18\x01 \x03(\x0b\x32\x1a.fplsupercharge.ColumnDefs\x12%\n\x07rowData\x18\x02 \x03(\x0b\x32\x14.fplsupercharge.Team2|\n\x0b\x41piServices\x12m\n\tlistTeams\x12\x19.fplsupercharge.ListTeams\x1a\".fplsupercharge.ListTeams.Response\"!\xf2\x86\x19\x1d\n\x1b\n\x03GET\x12\x0e/fpl/listTeams\x1a\x04\x08\x02\x10\x00:I\n\x03rpc\x12\x1e.google.protobuf.MethodOptions\x18\xee\x90\x03 \x01(\x0b\x32\x1a.fplsupercharge.RpcOptionsB\x03\x90\x01\x01'
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 
@@ -352,17 +352,38 @@ _TEAMS = _descriptor.Descriptor(
 )
 
 
-_LISTTEAMS_RESPONSE = _descriptor.Descriptor(
-  name='Response',
-  full_name='fplsupercharge.ListTeams.Response',
+_COLUMNDEFS = _descriptor.Descriptor(
+  name='ColumnDefs',
+  full_name='fplsupercharge.ColumnDefs',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='teams', full_name='fplsupercharge.ListTeams.Response.teams', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='headerName', full_name='fplsupercharge.ColumnDefs.headerName', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='field', full_name='fplsupercharge.ColumnDefs.field', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filter', full_name='fplsupercharge.ColumnDefs.filter', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='fplsupercharge.ColumnDefs.type', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -378,8 +399,46 @@ _LISTTEAMS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=769,
-  serialized_end=817,
+  serialized_start=756,
+  serialized_end=833,
+)
+
+
+_LISTTEAMS_RESPONSE = _descriptor.Descriptor(
+  name='Response',
+  full_name='fplsupercharge.ListTeams.Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='columnDefs', full_name='fplsupercharge.ListTeams.Response.columnDefs', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rowData', full_name='fplsupercharge.ListTeams.Response.rowData', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=848,
+  serialized_end=945,
 )
 
 _LISTTEAMS = _descriptor.Descriptor(
@@ -401,20 +460,22 @@ _LISTTEAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=756,
-  serialized_end=817,
+  serialized_start=835,
+  serialized_end=945,
 )
 
 _HTTPENDPOINT.fields_by_name['since'].message_type = _APIVERSION
 _RPCOPTIONS.fields_by_name['endpoints'].message_type = _HTTPENDPOINT
 _TEAMS.fields_by_name['team'].message_type = _TEAM
-_LISTTEAMS_RESPONSE.fields_by_name['teams'].message_type = _TEAMS
+_LISTTEAMS_RESPONSE.fields_by_name['columnDefs'].message_type = _COLUMNDEFS
+_LISTTEAMS_RESPONSE.fields_by_name['rowData'].message_type = _TEAM
 _LISTTEAMS_RESPONSE.containing_type = _LISTTEAMS
 DESCRIPTOR.message_types_by_name['HttpEndpoint'] = _HTTPENDPOINT
 DESCRIPTOR.message_types_by_name['ApiVersion'] = _APIVERSION
 DESCRIPTOR.message_types_by_name['RpcOptions'] = _RPCOPTIONS
 DESCRIPTOR.message_types_by_name['Team'] = _TEAM
 DESCRIPTOR.message_types_by_name['Teams'] = _TEAMS
+DESCRIPTOR.message_types_by_name['ColumnDefs'] = _COLUMNDEFS
 DESCRIPTOR.message_types_by_name['ListTeams'] = _LISTTEAMS
 DESCRIPTOR.extensions_by_name['rpc'] = rpc
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -454,6 +515,13 @@ Teams = _reflection.GeneratedProtocolMessageType('Teams', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Teams)
 
+ColumnDefs = _reflection.GeneratedProtocolMessageType('ColumnDefs', (_message.Message,), {
+  'DESCRIPTOR' : _COLUMNDEFS,
+  '__module__' : 'apiServices_pb2'
+  # @@protoc_insertion_point(class_scope:fplsupercharge.ColumnDefs)
+  })
+_sym_db.RegisterMessage(ColumnDefs)
+
 ListTeams = _reflection.GeneratedProtocolMessageType('ListTeams', (_message.Message,), {
 
   'Response' : _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), {
@@ -480,8 +548,8 @@ _APISERVICES = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=819,
-  serialized_end=943,
+  serialized_start=947,
+  serialized_end=1071,
   methods=[
   _descriptor.MethodDescriptor(
     name='listTeams',

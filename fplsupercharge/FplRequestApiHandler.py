@@ -1,24 +1,21 @@
 """ Package that Handles all API Request to FPL"""
 # Os import sections
-from aiohttp import ClientSession, TCPConnector
-import asyncio
+
 # third party import
 from fpl import FPL
+from fplsupercharge.Utils.protosUtils import parse_dict
+from fplsupercharge.protos.apiServices_pb2 import Teams
 # local import
 
 
 class FplRequestApiHandler(FPL):
-    async def createSession(email: str = None , password: str=None):
-        self = FplRequestApiHandler(ClientSession)
-        await self.login(email, password)
-        return self
-        
+    async def get_all_teams(self) -> Teams:
+        res = Teams()
+        teams = await self.get_teams(return_json=True)
+        for t in teams:
+            team = res.team.add()
+            team = parse_dict(t, team)
+        return res
 
-async def main():
-    fplRequestApiHandler = await FplRequestApiHandler.createSession(email="",password="<>")
-    print(fplRequestApiHandler.get_team(1))
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
-    
+    async def get_mini_league_stats(self, id: int):
+        pass

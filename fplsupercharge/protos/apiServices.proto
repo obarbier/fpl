@@ -77,11 +77,18 @@ message Teams {
   repeated Team team = 1;
 }
 
+message ColumnDefs {
+  optional string headerName = 1;
+  optional string field = 2;
+  optional string filter = 3;
+  repeated string type = 4;
+}
+
   message ListTeams {
   
     message Response {
-      // All teams.
-      optional Teams teams = 1;
+      repeated ColumnDefs columnDefs = 1;
+      repeated Team  rowData = 2;
     }
   }
   
