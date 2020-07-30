@@ -6,7 +6,7 @@ import "google/protobuf/descriptor.proto";
 option py_generic_services = true;
 message HttpEndpoint {
     // HTTP method like POST or GET.
-    optional string method = 1 [default = "POST"];
+    optional string method = 1 [default = "GET"];
   
     // Conceptual path of the API, like "/clusters" or "/clusters/create". Should start with a slash.
     optional string path = 2;

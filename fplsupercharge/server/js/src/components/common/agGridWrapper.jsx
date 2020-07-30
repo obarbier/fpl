@@ -16,8 +16,8 @@ class AgGridWrapper extends Component {
             columnDefs : [],
             rowData : [],
             style : {
-                height: '300px',
-                width: '800px'
+                height: '800px',
+                width: '100%'
             },
             defaultColDef: {
                 width: 150,

@@ -26,7 +26,7 @@ class App extends Component {
             <div className="container__col-2">
               <Navbar routes={this.state.sidebar} />
             </div>
-            <div id="container__col-10 content">
+            <div className="container__col-10 content">
                 <RouteWrapper />
             </div>
           </Router>

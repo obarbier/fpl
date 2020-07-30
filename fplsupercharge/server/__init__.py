@@ -4,6 +4,7 @@ import sys
 import shlex
 import asyncio
 import pathlib
+from sanic_cors import CORS, cross_origin
 
 
 from sanic import Sanic
@@ -22,6 +23,7 @@ STATIC_DIR = PROJECT_ROOT / "js/build"
 INDEX_DIR = PROJECT_ROOT / "js/build/index.html"
 loop = asyncio.get_event_loop()
 app = Sanic(__name__)
+CORS(app) # FIXME: allowing only api
 fFplRequestApiHandler: FplRequestApiHandler
 
 
