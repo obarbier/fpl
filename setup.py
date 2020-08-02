@@ -39,7 +39,7 @@ setup_requirements = ["click>=7.0",
                       "sanic_cors"
                       ]
 # FIXME: change author email
-test_requirements = ["tox==3.14.0", "flake8==3.7.8"]
+test_requirements = ["tox==3.14.0", "flake8==3.7.8" , "wheel"]
 
 setup(
     author="Olivier Cedric Barbier",
@@ -69,7 +69,7 @@ setup(
     keywords='fplsupercharge',
     name='fplsupercharge',
     packages=find_packages(include=['fplsupercharge', 'fplsupercharge.*'],
-                           exclude=["build"]),
+                           exclude=["build/*"]),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
