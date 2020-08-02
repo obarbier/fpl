@@ -35,7 +35,8 @@ setup_requirements = ["click>=7.0",
                         'waitress; platform_system == "Windows"',
                         'gunicorn; platform_system != "Windows"',
                       "protobuf==3.12.2",
-                      "fpl"
+                      "fpl",
+                      "neo4j==4.1.0"
                       ]
 # FIXME: change author email
 test_requirements = [ "tox==3.14.0", "flake8==3.7.8"]

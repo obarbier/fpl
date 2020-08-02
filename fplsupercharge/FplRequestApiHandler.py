@@ -9,7 +9,7 @@ from fplsupercharge.protos.apiServices_pb2 import Teams
 
 
 class FplRequestApiHandler(FPL):
-    async def get_all_teams(self) -> Teams:
+    async def get_proto_team(self) -> Teams:
         res = Teams()
         teams = await self.get_teams(return_json=True)
         for t in teams:
