@@ -18,7 +18,9 @@ class test(unittest.TestCase):
         super(test, self).__init__(*args, **kwargs)
 
     def test_get_all_teams(self):
-        response = asyncio.run(get_all_teams())
+        loop = asyncio.get_event_loop()
+        response = loop.run_until_complete(get_all_teams())
+        loop.close()
         self.assertTrue(isinstance(response, Teams))
 
 if __name__ == '__main__':
