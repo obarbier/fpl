@@ -39,7 +39,7 @@ setup_requirements = ["click>=7.0",
                       "sanic_cors"
                       ]
 # FIXME: change author email
-test_requirements = ["tox==3.14.0", "flake8==3.7.8" , "wheel"]
+test_requirements = ["tox==3.14.0", "flake8==3.7.8" , "wheel", "bdist_wheel"]
 
 setup(
     author="Olivier Cedric Barbier",
