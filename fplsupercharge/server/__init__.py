@@ -4,7 +4,7 @@ import sys
 import shlex
 import asyncio
 import pathlib
-from sanic_cors import CORS, cross_origin
+from sanic_cors import CORS
 
 
 from sanic import Sanic
@@ -12,8 +12,12 @@ from sanic.response import raw, json
 import aiohttp
 
 from fplsupercharge.Utils.process import exec_cmd
-from fplsupercharge.protos.apiServices_pb2 import ApiServices, ListTeams, rpc, Team, Teams
-from fplsupercharge.Utils.protosUtils import message_to_json, generateColumnDefsFromMessage, parse_dict
+from fplsupercharge.protos.apiServices_pb2 import (
+    ApiServices,
+    ListTeams, rpc, Team)
+from fplsupercharge.Utils.protosUtils import (
+    message_to_json,
+    generateColumnDefsFromMessage, parse_dict)
 from fplsupercharge import FplRequestApiHandler
 from fpl import FPL
 REL_STATIC_DIR = "js/build"
@@ -23,13 +27,13 @@ STATIC_DIR = PROJECT_ROOT / "js/build"
 INDEX_DIR = PROJECT_ROOT / "js/build/index.html"
 loop = asyncio.get_event_loop()
 app = Sanic(__name__)
-CORS(app) # FIXME: allowing only api
+CORS(app)  # FIXME: allowing only api
 fFplRequestApiHandler: FplRequestApiHandler
 
 
 @app.listener('before_server_start')
 async def init(app, loop):
-    app.aiohttp_session = aiohttp.ClientSession(loop=loop);
+    app.aiohttp_session = aiohttp.ClientSession(loop=loop)
 
 
 @app.listener('after_server_stop')
@@ -61,7 +65,8 @@ async def _listTeams(request):
     for t in teams:
         team = res.add()
         team = parse_dict(t, team)
-    return raw(message_to_json(response_message),status=200 ,headers={ "Content-Type":"application/json"})
+    return raw(message_to_json(response_message),
+               status=200, headers={"Content-Type": "application/json"})
 
 
 HANDLERS = {
