@@ -1,7 +1,7 @@
 """Tests for `fplsupercharge.protos` package."""
 
 import unittest
-from fplsupercharge.protos.team_pb2 import Team
+from fplsupercharge.protos.apiServices_pb2 import Team
 
 
 class TestProtos(unittest.TestCase):
