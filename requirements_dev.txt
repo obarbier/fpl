@@ -3,3 +3,4 @@ flake8==3.7.8
 itsdangerous>=0.24
 sphinx
 pre-commit
+wheel
