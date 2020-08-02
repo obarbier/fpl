@@ -4,3 +4,4 @@ itsdangerous>=0.24
 MarkupSafe>=1.1
 sphinx
 pre-commit
+wheel

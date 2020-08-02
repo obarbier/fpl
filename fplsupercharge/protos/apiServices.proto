@@ -1,0 +1,94 @@
+
+syntax = "proto2";
+package fplsupercharge;
+
+import "google/protobuf/descriptor.proto";
+option py_generic_services = true;
+message HttpEndpoint {
+    // HTTP method like POST or GET.
+    optional string method = 1 [default = "GET"];
+  
+    // Conceptual path of the API, like "/clusters" or "/clusters/create". Should start with a slash.
+    optional string path = 2;
+  
+    // A version like 1.1 which is prepended to the URL (e.g., GET /1.1/clusters).
+    // Breaking changes to an RPC must use a different version number.
+    optional ApiVersion since = 3;
+  }
+  
+  message ApiVersion {
+    optional int32 major = 1;
+    optional int32 minor = 2;
+  }  
+  
+  message RpcOptions {
+    repeated HttpEndpoint endpoints = 1;
+  
+  }
+  
+  
+  // Note: 51310 is the beginning of the range of proto extension values for use by applications.
+  extend google.protobuf.MethodOptions {
+    optional RpcOptions rpc = 51310;
+  
+  }
+  
+  service ApiServices {
+  
+  
+  // Get a list of all Teams.
+  rpc listTeams (ListTeams) returns (ListTeams.Response) {
+    option (rpc) = {
+        endpoints: [{
+          method: "GET",
+          path: "/fpl/listTeams",
+          since { major: 2, minor: 0 },
+        }]
+      };
+  }
+  }
+  //
+  message Team {
+    optional int32 code = 1;
+    optional int32 draw = 2;
+    optional int32 form = 3;
+    optional int32 id   = 4;
+    optional int32 loss	= 5;
+    optional string name = 6;
+    optional int32 played = 7;
+    optional int32 points = 8;
+    optional int32 position	= 9;
+    optional string short_name = 10;
+    optional int32 strength	= 11;
+    optional int32 team_division = 12;
+    optional bool unavailable =	13;
+    optional int32 win = 14;
+    optional int32 strength_overall_home = 15;
+    optional int32 strength_overall_away = 16;
+    optional int32 strength_attack_home	= 17;
+    optional int32 strength_attack_away	= 18;
+    optional int32 strength_defence_home =19;
+    optional int32 strength_defence_away = 20;
+    optional int32 pulse_id	= 21;
+
+}
+
+message Teams {
+  repeated Team team = 1;
+}
+
+message ColumnDefs {
+  optional string headerName = 1;
+  optional string field = 2;
+  optional string filter = 3;
+  repeated string type = 4;
+}
+
+  message ListTeams {
+  
+    message Response {
+      repeated ColumnDefs columnDefs = 1;
+      repeated Team  rowData = 2;
+    }
+  }
+  

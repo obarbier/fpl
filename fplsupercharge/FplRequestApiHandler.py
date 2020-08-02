@@ -2,14 +2,20 @@
 # Os import sections
 
 # third party import
-from uplink import Consumer, get
-
+from fpl import FPL
+from fplsupercharge.Utils.protosUtils import parse_dict
+from fplsupercharge.protos.apiServices_pb2 import Teams
 # local import
-from fplsupercharge.Utils.constants import API_URLS
-from fplsupercharge.protos.team_pb2 import Teams
 
 
-class FplRequestApiHandler(Consumer):
-    @get(API_URLS["static"])
-    def get_teams(self) -> Teams:
-        """get static response"""
+class FplRequestApiHandler(FPL):
+    async def get_all_teams(self) -> Teams:
+        res = Teams()
+        teams = await self.get_teams(return_json=True)
+        for t in teams:
+            team = res.team.add()
+            team = parse_dict(t, team)
+        return res
+
+    async def get_mini_league_stats(self, id: int):
+        pass

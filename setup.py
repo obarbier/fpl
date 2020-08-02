@@ -28,16 +28,18 @@ requirements = []
 #     requirements = [line.rstrip() for line in lines]
 
 
-setup_requirements = ["Click>=7.0",
-                      "Flask",
+setup_requirements = ["click>=7.0",
+                      "flask",
                       "uplink>=0.9.1",
                       "gunicorn==20.0.4",
-                        'waitress; platform_system == "Windows"',
-                        'gunicorn; platform_system != "Windows"',
-                      "protobuf==3.12.2"
+                      'waitress; platform_system == "Windows"',
+                      'gunicorn; platform_system != "Windows"',
+                      "protobuf==3.12.2",
+                      "fpl",
+                      "sanic_cors"
                       ]
 # FIXME: change author email
-test_requirements = [ "tox==3.14.0", "flake8==3.7.8"]
+test_requirements = ["tox==3.14.0", "flake8==3.7.8"]
 
 setup(
     author="Olivier Cedric Barbier",
@@ -66,7 +68,8 @@ setup(
     include_package_data=True,
     keywords='fplsupercharge',
     name='fplsupercharge',
-    packages=find_packages(include=['fplsupercharge', 'fplsupercharge.*']),
+    packages=find_packages(include=['fplsupercharge', 'fplsupercharge.*'],
+                           exclude=["build/*"]),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,

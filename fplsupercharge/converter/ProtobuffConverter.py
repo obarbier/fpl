@@ -6,7 +6,7 @@ from google.protobuf import message
 from uplink import converters, returns, json
 # local imports
 from fplsupercharge.converter import json_options, helpers
-from fplsupercharge.protos.team_pb2 import Teams
+from fplsupercharge.protos.apiServices_pb2 import Teams
 from fplsupercharge.Utils import protosUtils
 
 
