@@ -28,7 +28,6 @@ INDEX_DIR = PROJECT_ROOT / "js/build/index.html"
 loop = asyncio.get_event_loop()
 app = Sanic(__name__)
 CORS(app)  # FIXME: allowing only api
-fFplRequestApiHandler: FplRequestApiHandler
 
 
 @app.listener('before_server_start')
