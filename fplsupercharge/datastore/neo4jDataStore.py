@@ -10,7 +10,7 @@ handler.setLevel(DEBUG)
 logger = getLogger("neo4j").addHandler(handler)
 
 
-class FplDatastore:
+class Datastore:
     def __init__(self):
         try:
             self.driver = GraphDatabase.driver(
@@ -37,29 +37,15 @@ class FplDatastore:
             session.run(
                 "MATCH (a:Player),(b:Team) WHERE a.team = b.id create (a)-[r:playsIn]->(b)")
 
-    def create_league(self, league):
+    def create_league(self, list_leagues):
         with self.driver.session() as session:
-            session.run("CREATE (n:League) set n = $league", league=league)
+            [session.run("CREATE (n:League) set n = $league", league=league)
+             for league in list_leagues]
 
-    def create_user(self, user):
+    def create_user(self, list_users):
         with self.driver.session() as session:
-            session.run("CREATE (n:User) set n = $user", user=user)
+            [session.run("CREATE (n:User) set n = $user", user=user)
+             for user in list_users]
 
-
-async def main():
-    fplDatastore = FplDatastore()
-    async with aiohttp.ClientSession() as session:
-        fpl = FPL(session)
-        await fpl.login("obarbier13@gmail.com","olivier007")
-        classic_league = await fpl.get_classic_league(21)
-        page = 1;
-        while True:
-            standing = await classic_league.get_standings(page=page)
-            print(standing)
-            if(standing['page']):
-                page = page + 1
-            else:
-                break
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    def create_user_and_leagues(self, _list_users):
+        pass
