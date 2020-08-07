@@ -23,14 +23,22 @@ class Datastore:
         self._driver.close()
 
     def create_teams(self, list_teams):
+        query = """
+        UNWIND $team AS properties
+        CREATE (n:Team)
+        SET n = properties
+        """
         with self.driver.session() as session:
-            [session.run("CREATE (n:Team) set n = $team", team=team)
-             for team in list_teams]
+            session.run(query, team=list_teams)
 
     def create_players(self, list_players):
+        query = """
+        UNWIND $player AS properties
+        CREATE (n:Player)
+        SET n = properties
+        """
         with self.driver.session() as session:
-            [session.run("CREATE (n:Player) set n = $player", player=player)
-             for player in list_players]
+            session.run(query, player=list_players)
 
     def player_playsIn_team(self):
         with self.driver.session() as session:
@@ -38,14 +46,42 @@ class Datastore:
                 "MATCH (a:Player),(b:Team) WHERE a.team = b.id create (a)-[r:playsIn]->(b)")
 
     def create_league(self, list_leagues):
+        query = """
+        UNWIND $league AS properties
+        CREATE (n:League)
+        SET n = properties
+        """
         with self.driver.session() as session:
-            [session.run("CREATE (n:League) set n = $league", league=league)
-             for league in list_leagues]
+            session.run(query, league=list_leagues)
 
     def create_user(self, list_users):
+        query = """
+        UNWIND $user AS properties
+        CREATE (n:User)
+        SET n = properties
+        """
         with self.driver.session() as session:
-            [session.run("CREATE (n:User) set n = $user", user=user)
-             for user in list_users]
+            session.run(query, user=list_users)
 
-    def create_user_and_leagues(self, _list_users):
-        pass
+    def create_user_and_leagues(self, user, list_leagues):
+        query = """
+        CREATE (u:User ) set u = $user
+        WITH u
+        UNWIND $leagues AS league
+        CREATE (u)-[:IN]->(l:League) set l = league
+        """
+        with self.driver.session() as session:
+            session.run(query, user=user, leagues=list_leagues)
+
+    def map_user_picks(self, user_id, gameweek_id, gameweek_picks):
+        # gameweek_picks = map(json.dumps,gameweek_picks)
+        query = """
+        UNWIND $gameweek_picks as pick
+        MATCH (p:Player) , (u:User) WHERE u.id = $user_id and
+        p.id = pick.element
+        MERGE (u)-[rel:OWN]->(p) set rel = pick, 
+        rel.gameweek_id =  COALESCE(rel.gameweek_id , []) + $gameweek_id 
+        """
+        with self.driver.session() as session:
+            session.run(query, user_id=user_id,
+                        gameweek_id=gameweek_id, gameweek_picks=gameweek_picks)
