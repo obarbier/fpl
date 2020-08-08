@@ -8,10 +8,12 @@ import aiohttp
 from fplsupercharge.protos.apiServices_pb2 import Teams
 from fplsupercharge.FplRequestApiHandler import FplRequestApiHandler
 
+
 async def get_all_teams():
     async with aiohttp.ClientSession() as session:
         fplRequestApiHandler = FplRequestApiHandler(session)
         return await fplRequestApiHandler.get_all_teams()
+
 
 class test(unittest.TestCase):
     def __init__(self, *args, **kwargs):
@@ -22,6 +24,7 @@ class test(unittest.TestCase):
         response = loop.run_until_complete(get_all_teams())
         loop.close()
         self.assertTrue(isinstance(response, Teams))
+
 
 if __name__ == '__main__':
     unittest.main()

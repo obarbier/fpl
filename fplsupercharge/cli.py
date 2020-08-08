@@ -8,9 +8,11 @@ import shutil
 import logging
 import configparser
 
-from fplsupercharge.server import _run_server
+from fplsupercharge.server.application import (Waitress,
+                                               Gunicorn,
+                                               RunServer,
+                                               Core)
 from fplsupercharge.Utils import cli_args, iniFileConstant
-from fplsupercharge.Utils.process import ShellCommandException
 
 _logger = logging.getLogger(__name__)
 
@@ -83,14 +85,21 @@ def teardown():
 @cli_args.HOST
 # FIXME: Application need to get perisistence info from initFile
 def ui(port, host):
-    try:
-        _run_server(host, port, None)
-    except ShellCommandException:
-        print("Running the fpl server failed.")
-        sys.exit(1)
+    # TODO: TRY/EXCEPT BLOCK
+    dict = {'config': {'host': "80",
+                       'port': port,
+                       'opts': None}}
+    coreContainer = Core()
+    coreContainer.config.from_dict(dict)
+    if sys.platform == 'win32':
+        adapters = Waitress()
+    else:
+        adapters = Gunicorn()
+    runServer = RunServer()
+    runServer.run(cmd=adapters.server())
+
+
 # TODO: As a user application/db need to be update
-
-
 @main.command()
 def refreshUpdate():
     pass

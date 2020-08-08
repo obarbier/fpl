@@ -1,12 +1,36 @@
 import os
+import shlex
 import subprocess
+
+
+def build_waitress_command(opts, host, port):
+    opts = shlex.split(opts) if opts else []
+    return ['waitress-serve'] + \
+        opts + [
+        "--host=%s" % host,
+        "--port=%s" % port,
+        "--ident=fplsupercharge",
+        "fplsupercharge.server:create_app()"
+    ]
+
+
+def build_gunicorn_command(opts, host, port, workers):
+    bind_address = "%s:%s" % (host, port)
+    opts = shlex.split(opts) if opts else []
+    return ["gunicorn"] + \
+        opts + [
+            "-b",
+            bind_address,
+            "-w",
+            "%s" % workers,
+            "fplsupercharge.server:create_app()"]
 
 
 class ShellCommandException(Exception):
     pass
 
 
-def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=False,
+def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=True,
              cwd=None, cmd_stdin=None,
              **kwargs):
     """
