@@ -34,7 +34,8 @@ setup_requirements = ["Click>=7.0",
                       "gunicorn==20.0.4",
                         'waitress; platform_system == "Windows"',
                         'gunicorn; platform_system != "Windows"',
-                      "protobuf==3.12.2"
+                      "protobuf==3.12.2",
+                      "scrapy==2.3.0"
                       ]
 # FIXME: change author email
 test_requirements = [ "tox==3.14.0", "flake8==3.7.8"]
