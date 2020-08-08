@@ -38,6 +38,7 @@ setup_requirements = ["click>=7.0",
                       "scrapy==2.3.0",
                       "protobuf==3.12.2",
                       "fpl",
+                      "neo4j==4.1.0",
                       "sanic_cors"
                       ]
 # FIXME: change author email
