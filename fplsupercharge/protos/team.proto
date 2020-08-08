@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package fpl;
+package fplsupercharge;
 
 message Team {
     optional int32 code = 1;
