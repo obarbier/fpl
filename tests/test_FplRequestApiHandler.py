@@ -6,7 +6,7 @@ import asyncio
 import aiohttp
 # local import
 from fplsupercharge.protos.apiServices_pb2 import Teams
-from fplsupercharge.FplRequestApiHandler import FplRequestApiHandler
+from fplsupercharge.services.fplRequestApiServices import FplRequestApiHandler
 
 
 async def get_all_teams():
