@@ -2,13 +2,16 @@
 # Os import sections
 
 # third party import
-from fpl import FPL
-from fplsupercharge.Utils.protosUtils import parse_dict
+import fpl
+from fplsupercharge.utils.protosUtils import parse_dict
 from fplsupercharge.protos.apiServices_pb2 import Teams
 # local import
 
 
-class FplRequestApiHandler(FPL):
+fpl.utils.headers = {"User-Agent": "PostmanRuntime/7.26.1"}
+
+
+class FplRequestApiHandler(fpl.FPL):
     async def get_proto_team(self) -> Teams:
         res = Teams()
         teams = await self.get_teams(return_json=True)
@@ -30,11 +33,11 @@ class FplRequestApiHandler(FPL):
         return classic_leagues
 
     async def get_mini_league_stats(self, id: int):
-        #TODO: a way to get static about minileagues
+        # TODO: a way to get static about minileagues
         # this could be implemented in database
         pass
-    
-    async def generate_dream_team_info(self,id):
+
+    async def generate_dream_team_info(self, id):
         # TODO: Need to create a speacial User called (dreamTeam) and track
         # progress over the seasson
         pass

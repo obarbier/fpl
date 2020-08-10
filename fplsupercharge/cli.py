@@ -5,18 +5,19 @@ import sys
 import click
 import os
 import shutil
-import logging
 import configparser
 
-from fplsupercharge.server.application import (Waitress,
-                                               Gunicorn,
-                                               RunServer,
-                                               Core)
-from fplsupercharge.Utils import cli_args, iniFileConstant
+from fplsupercharge.container import (Waitress,
+                                      Gunicorn,
+                                      RunServer,
+                                      Core)
+from fplsupercharge.utils import coroutine , cli_args, iniFileConstant
+import logging.config
 
-_logger = logging.getLogger(__name__)
-
-
+# setting
+logging.config.fileConfig('logging.conf')
+core = Core()
+logger = core.logger().getChild("cli")
 @click.group()
 @click.version_option()
 def main(args=None):
@@ -85,24 +86,20 @@ def teardown():
 @cli_args.HOST
 # FIXME: Application need to get perisistence info from initFile
 def ui(port, host):
-    # TODO: TRY/EXCEPT BLOCK
-    dict = {'config': {'host': "80",
-                       'port': port,
-                       'opts': None}}
-    coreContainer = Core()
-    coreContainer.config.from_dict(dict)
     if sys.platform == 'win32':
         adapters = Waitress()
     else:
         adapters = Gunicorn()
-    runServer = RunServer()
-    runServer.run(cmd=adapters.server())
+    RunServer.run(cmd=adapters.server())
 
 
-# TODO: As a user application/db need to be update
 @main.command()
-def refreshUpdate():
-    pass
+@coroutine
+async def initializedb():
+    try:
+        await RunServer.intialDataLoad()
+    except Exception as ex:
+        logger.error(ex)
 
 
 if __name__ == "__main__":

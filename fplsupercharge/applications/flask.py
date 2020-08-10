@@ -1,9 +1,9 @@
 import os
-from fplsupercharge.server.container import ApplicationContainer
+from fplsupercharge.container import ApplicationContainer
 from flask import send_from_directory
 
 
-def create_app():
+def create_ui():
     """Create and return Flask application."""
     # initiate app
     REL_STATIC_DIR = 'js/build'

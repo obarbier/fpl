@@ -3,18 +3,20 @@ import shlex
 import subprocess
 
 
-def build_waitress_command(opts, host, port):
+def build_waitress_command(opts, logger, host, port):
     opts = shlex.split(opts) if opts else []
+    logger.info("Starting Waitress Server")
     return ['waitress-serve'] + \
         opts + [
         "--host=%s" % host,
         "--port=%s" % port,
         "--ident=fplsupercharge",
-        "fplsupercharge.server:create_app()"
+        "fplsupercharge.applications.flask:create_ui()"
     ]
 
 
-def build_gunicorn_command(opts, host, port, workers):
+def build_gunicorn_command(opts, logger, host, port, workers):
+    logger.info("Starting Gunicorn Server")
     bind_address = "%s:%s" % (host, port)
     opts = shlex.split(opts) if opts else []
     return ["gunicorn"] + \
@@ -23,14 +25,14 @@ def build_gunicorn_command(opts, host, port, workers):
             bind_address,
             "-w",
             "%s" % workers,
-            "fplsupercharge.server:create_app()"]
+            "fplsupercharge.applications.flask:create_ui()"]
 
 
 class ShellCommandException(Exception):
     pass
 
 
-def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=True,
+def exec_cmd(cmd, logger, throw_on_error=True, env=None, stream_output=True,
              cwd=None, cmd_stdin=None,
              **kwargs):
     """
@@ -54,6 +56,7 @@ def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=True,
     standard error is
     returned.
     """
+    logger.info("About to execute some commands")
     cmd_env = os.environ.copy()
     if env:
         cmd_env.update(env)
@@ -65,6 +68,7 @@ def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=True,
         child.communicate(cmd_stdin)
         exit_code = child.wait()
         if throw_on_error and exit_code != 0:
+            logger.error("Non-zero exitcode: %s" % (exit_code))
             raise ShellCommandException("Non-zero exitcode: %s" % (exit_code))
         return exit_code
     else:
@@ -75,6 +79,7 @@ def exec_cmd(cmd, throw_on_error=True, env=None, stream_output=True,
         (stdout, stderr) = child.communicate(cmd_stdin)
         exit_code = child.wait()
         if throw_on_error and exit_code != 0:
+            logger.error("Non-zero exitcode: %s" % (exit_code))
             raise ShellCommandException(
                 "Non-zero exit code: %s\n\nSTDOUT:\n%s\n\nSTDERR:%s" %
                 (exit_code, stdout, stderr))
