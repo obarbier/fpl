@@ -12,7 +12,7 @@ from fplsupercharge.services.fplRequestApiServices import FplRequestApiHandler
 async def get_all_teams():
     async with aiohttp.ClientSession() as session:
         fplRequestApiHandler = FplRequestApiHandler(session)
-        return await fplRequestApiHandler.get_all_teams()
+        return await fplRequestApiHandler.get_proto_team()
 
 
 class test(unittest.TestCase):
