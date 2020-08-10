@@ -5,3 +5,5 @@ MarkupSafe>=1.1
 sphinx
 pre-commit
 wheel
+dependency_injector
+kaptan
