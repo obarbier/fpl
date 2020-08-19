@@ -24,6 +24,8 @@ async def intialDataload(username: str, password: str,
     for gameweek_id, pick in picks.items():
         db.map_user_picks(user_id, gameweek_id, pick)
 
+async def weeklyUpdate(logger):
+    raise NotImplementedError
 
 async def createOrUpdateUserinfo(user_id: str, logger):
     raise NotImplementedError

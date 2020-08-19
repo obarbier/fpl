@@ -5,11 +5,13 @@ we should be able to deside a database and the application
 will store the data as needed
 """
 from neo4j import GraphDatabase
-from neo4j.exceptions import ServiceUnavailable
-from typing import Tuple
+from neo4j.exceptions import ServiceUnavailable, AuthError
+from fplsupercharge.utils.protosUtils import parse_dict
+from fplsupercharge.protos.apiServices_pb2 import Team
+import typing
+__all__ = ["Datastore"]
 
-
-Auth = Tuple[str, str]
+# TODO: add decorator to remove dependencies on proto message
 
 
 class Datastore:
@@ -19,7 +21,7 @@ class Datastore:
             self._driver = GraphDatabase.driver(
                 uri=uri, auth=(username, password))
             logger.info("succesfully logged into: {} ".format(uri))
-        except Exception as ex:
+        except AuthError as ex:
             logger.error(
                 "Driver Error occured while initializing db {}".format(ex))
             raise
@@ -172,3 +174,35 @@ class Datastore:
                                .format(
                                    query=query, exception=exception))
             raise
+
+    def get_teams(self) -> typing.List[Team]:
+        query = "Match (t:Team ) return t"
+        try:
+            self._logger.info("started map_user_picks operation")
+            res = []
+            with self._driver.session() as session:
+                result = session.run(query)
+                for record in result:
+                    team = Team()
+                    parse_dict(dict(zip(record.get('t').keys(),
+                                        record.get('t').values())),
+                               team)
+                    res.append(team)
+            return res
+        except ServiceUnavailable as ex:
+            self._logger.error("{query} raised an error: \n {exception}"
+                               .format(
+                                   query=query, exception=ex))
+
+    def get_teamByID(self, id: int) -> None:
+        query = "Match p = (t:Team {id:$id} )-[]-() return p"
+        try:
+            self._logger.info("started map_user_picks operation")
+            with self._driver.session() as session:
+                result = session.run(query, id=id)
+                for record in result:
+                    print(record.get('p'))
+        except ServiceUnavailable as ex:
+            self._logger.error("{query} raised an error: \n {exception}"
+                               .format(
+                                   query=query, exception=ex))

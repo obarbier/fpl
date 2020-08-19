@@ -5,7 +5,7 @@ export default class RouteWrapper extends React.Component {
     render() {
         return (
             <Switch>
-                {/* TODO: Need to find better way for default Route */}
+                {/* TODO: Need to find better way for default Route  catch all into redict*/}
              <Route
                 exact
                 path="/"

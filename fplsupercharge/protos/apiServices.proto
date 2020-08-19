@@ -34,8 +34,16 @@ message HttpEndpoint {
   }
   
   service ApiServices {
-  
-  
+  // list one Team informations
+  rpc listOneTeams (ListOneTeam) returns (ListOneTeam.Response) {
+      option (rpc) = {
+          endpoints: [{
+            method: "GET",
+            path: "/fpl/listOneTeam",
+            since { major: 2, minor: 0 },
+          }]
+        };
+    }
   // Get a list of all Teams.
   rpc listTeams (ListTeams) returns (ListTeams.Response) {
     option (rpc) = {
@@ -47,7 +55,11 @@ message HttpEndpoint {
       };
   }
   }
-  //
+  
+  message Node{
+    
+  }
+
   message Team {
     optional int32 code = 1;
     optional int32 draw = 2;
@@ -83,12 +95,18 @@ message ColumnDefs {
   optional string filter = 3;
   repeated string type = 4;
 }
+message ListOneTeam {
+  optional int32 id = 1;
+  message Response {
+    optional Team team = 1;
+    optional Team team_fixture = 2;
+  }
+}
 
   message ListTeams {
   
     message Response {
-      repeated ColumnDefs columnDefs = 1;
-      repeated Team  rowData = 2;
+      repeated Team team = 1;
     }
   }
   

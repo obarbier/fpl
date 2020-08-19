@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {AgGridReact} from '@ag-grid-community/react';
-
+import {TeamCellRender} from './agGridFramework'
 import {ModuleRegistry} from '@ag-grid-community/core';
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
 import {CsvExportModule} from "@ag-grid-community/csv-export";
@@ -19,6 +19,9 @@ class AgGridWrapper extends Component {
                 height: '800px',
                 width: '100%'
             },
+            frameworkComponents: {
+                teamCellRender: TeamCellRender,
+              },
             defaultColDef: {
                 width: 150,
                 resizable: false,
@@ -61,9 +64,10 @@ class AgGridWrapper extends Component {
               <br/>
 
             <AgGridReact
-                    modules={this.state.modules}
+                modules={this.state.modules}
                 columnDefs={columnDefs}
                 defaultColDef={this.state.defaultColDef}
+                frameworkComponents={this.state.frameworkComponents}
                 onGridReady={this.onGridReady}
                 rowData={rowData}
             />

@@ -1,23 +1,35 @@
+from flask import Response, g
 from fplsupercharge.protos.apiServices_pb2 import (
     ApiServices,
-    ListTeams, rpc)
+    ListTeams,
+    ListOneTeam, rpc)
+from fplsupercharge.utils.protosUtils import message_to_json
 
 
-def _listTeams(request):
+def _listTeams():
     """Return a list of team"""
-    return {}
+    listTeams = ListTeams()
+    resp = listTeams.Response()
+    resp.team.MergeFrom(g.db.get_teams())
+    response = Response(mimetype="application/json")
+    response.set_data(message_to_json(resp))
+    return response
 
+def _listOneTeam():
+    listOneTeam =ListOneTeam()
+    return {}, 404
 
 def _not_implemented():
-    # response = Response()
-    # response.status_code = 404
-    # return response
-    pass
+    response = Response()
+    response.status_code = 404
+    return response
 
 
 HANDLERS = {
     # Tracking Server APIs
-    ListTeams: _listTeams
+    ListTeams: _listTeams,
+    ListOneTeam: _listOneTeam
+    
 }
 
 

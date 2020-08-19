@@ -59,9 +59,9 @@ class Services(containers.DeclarativeContainer):
 
 
 class ApplicationContainer(containers.DeclarativeContainer):
-    config = providers.Configuration()
     app = flask.Application(Flask, __name__,
                             static_folder="js/build")
+    db = flask.Extension(Services.neo4jServices)
     endpoints = flask.Extension(get_endpoints)
 
 
