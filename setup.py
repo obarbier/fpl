@@ -41,7 +41,6 @@ setup_requirements = ["click>=7.0",
                       "neo4j==4.1.0",
                       "sanic_cors"
                       ]
-# FIXME: change author email
 test_requirements = ["tox==3.14.0",
                      "flake8==3.7.8"]
 

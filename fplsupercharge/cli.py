@@ -47,9 +47,10 @@ def init(username, password, initype, refresh, dbtype, dburl, dbpass):
         except OSError:
             print(iniFileConstant.TEMP_CREATION_MESSAGE_FAILED)
         else:
-            # FIXME:Test if file is present
+            # TODO: Rethink init config
+            # Test if file is present
             config = configparser.ConfigParser()
-            # FIXME: VERIFY data_provide
+            # VERIFY data_provide
             config.add_section(iniFileConstant.SECTION.get(1))
             config.set(iniFileConstant.SECTION.get(1), 'username', username)
             config.set(iniFileConstant.SECTION.get(1), 'password', password)
@@ -64,7 +65,7 @@ def init(username, password, initype, refresh, dbtype, dburl, dbpass):
             with open(iniFileConstant.SAVE_TEMPLATE.format(
                     iniFileConstant.FILE_NAME), 'w') as configfile:
                 config.write(configfile)
-            # FIXME: ENCODE/ENCRYPT using key
+            # ENCODE/ENCRYPT using key
             print(iniFileConstant.INI_CREATION_MESSAGE_SUCCESS)
 
 
@@ -82,10 +83,11 @@ def teardown():
 
 
 @main.command()
-@cli_args.PORT
-@cli_args.HOST
-# FIXME: Application need to get perisistence info from initFile
-def ui(port, host):
+def ui():
+    # TODO: Rethink ui and backend.
+    # essentialy grpc server should take care of backend
+    # while the ui/cli will be through grpc client
+    # just for the fun of it
     if sys.platform == 'win32':
         adapters = Waitress()
     else:

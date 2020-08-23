@@ -135,3 +135,4 @@ tmp/
 #other
 .vscode/
 .idea/
+.app.py

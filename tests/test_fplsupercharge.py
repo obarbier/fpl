@@ -32,7 +32,6 @@
 #         help_result = runner.invoke(cli.init, input=args)
 #         assert os.path.exists(SAVE_TEMPLATE.format(FILE_NAME)) == 1
 #         assert help_result.exit_code == 0
-#         # FIXME: Teardown
 #         # runner = CliRunner()
 #         # help_result = runner.invoke(cli.teardown, input ="\n")
 #         # print(help_result.output)

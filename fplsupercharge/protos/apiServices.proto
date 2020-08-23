@@ -1,24 +1,23 @@
-
-syntax = "proto2";
+syntax = "proto3";
 package fplsupercharge;
 
 import "google/protobuf/descriptor.proto";
 option py_generic_services = true;
 message HttpEndpoint {
     // HTTP method like POST or GET.
-    optional string method = 1 [default = "GET"];
+     string method = 1;
   
     // Conceptual path of the API, like "/clusters" or "/clusters/create". Should start with a slash.
-    optional string path = 2;
+     string path = 2;
   
     // A version like 1.1 which is prepended to the URL (e.g., GET /1.1/clusters).
     // Breaking changes to an RPC must use a different version number.
-    optional ApiVersion since = 3;
+     ApiVersion since = 3;
   }
   
   message ApiVersion {
-    optional int32 major = 1;
-    optional int32 minor = 2;
+     int32 major = 1;
+     int32 minor = 2;
   }  
   
   message RpcOptions {
@@ -29,7 +28,7 @@ message HttpEndpoint {
   
   // Note: 51310 is the beginning of the range of proto extension values for use by applications.
   extend google.protobuf.MethodOptions {
-    optional RpcOptions rpc = 51310;
+     RpcOptions rpc = 51310;
   
   }
   
@@ -54,35 +53,126 @@ message HttpEndpoint {
         }]
       };
   }
+    // Get a list of all Teams.
+    rpc listPlayers (ListPlayers) returns (ListPlayers.Response) {
+      option (rpc) = {
+          endpoints: [{
+            method: "GET",
+            path: "/fpl/listPlayers",
+            since { major: 2, minor: 0 },
+          }]
+        };
+    }
   }
   
   message Node{
-    
+    string identity =1;
+    repeated string labels = 2;
+  }
+  message Relationships{
+    string identity =1;
+    Node start =2;
+    Node end =3;
+    string type= 4;
+  }
+
+  message mapObjectInt{
+     string key =1;
+     int32 value = 2;
+  }
+
+  message difficulties{
+    map<string, int32> difficulties = 1;
+  }
+
+  message Fixture{
+    int32 diff= 1;
+    string opp = 2;
+    int32 game_week_id = 3; 
   }
 
   message Team {
-    optional int32 code = 1;
-    optional int32 draw = 2;
-    optional int32 form = 3;
-    optional int32 id   = 4;
-    optional int32 loss	= 5;
-    optional string name = 6;
-    optional int32 played = 7;
-    optional int32 points = 8;
-    optional int32 position	= 9;
-    optional string short_name = 10;
-    optional int32 strength	= 11;
-    optional int32 team_division = 12;
-    optional bool unavailable =	13;
-    optional int32 win = 14;
-    optional int32 strength_overall_home = 15;
-    optional int32 strength_overall_away = 16;
-    optional int32 strength_attack_home	= 17;
-    optional int32 strength_attack_away	= 18;
-    optional int32 strength_defence_home =19;
-    optional int32 strength_defence_away = 20;
-    optional int32 pulse_id	= 21;
+      int32 code = 1;
+      int32 draw = 2;
+      int32 form = 3;
+      int32 id   = 4;
+      int32 loss	= 5;
+      string name = 6;
+      int32 played = 7;
+      int32 points = 8;
+      int32 position	= 9;
+      string short_name = 10;
+      int32 strength	= 11;
+      int32 team_division = 12;
+      bool unavailable =	13;
+      int32 win = 14;
+      int32 strength_overall_home = 15;
+      int32 strength_overall_away = 16;
+      int32 strength_attack_home	= 17;
+      int32 strength_attack_away	= 18;
+      int32 strength_defence_home =19;
+      int32 strength_defence_away = 20;
+      int32 pulse_id	= 21;
+      repeated Fixture fixture = 22;
+}
 
+message Player{
+int32 own_goals = 1;
+int32 bonus= 2;
+int32 total_points=3;
+int32 influence= 4;
+int32 creativity_rank= 5;
+int32 saves= 6;
+int32 transfers_in= 7;
+double value_form= 8;
+int32 now_cost= 9;
+int32 id= 10;
+double creativity= 11;
+double influence_rank= 12;
+int32 goals_scored= 13;
+int32 minutes= 14;
+int32 yellow_cards= 15;
+double selected_by_percent= 16;
+double threat_rank_type= 17;
+double ict_index_rank_type= 18 ;
+bool in_dreamteam= 19;
+double cost_change_event_fall= 20;
+double ict_index_rank= 21;
+string second_name= 22;
+double cost_change_event= 23;
+double points_per_game= 24;
+double web_name= 25;
+string status= 26;
+int32 code= 27;
+int32 clean_sheets= 28;
+int32 goals_conceded= 29;
+int32 red_cards= 30;
+double cost_change_start= 31;
+int32 element_type= 32;
+int32 dreamteam_count= 33;
+double threat_rank= 34;
+int32 assists= 35;
+string first_name= 36;
+string news= 37;
+int32 bps= 38;
+double ep_next= 39;
+int32 transfers_out_event= 40;
+int32 penalties_missed= 41;
+string photo= 42;
+int32 transfers_in_event= 43;
+int32 team= 44;
+double cost_change_start_fall= 45;
+int32 event_points= 46;
+double influence_rank_type= 47;
+double creativity_rank_type= 48;
+double special= 49;
+int32 team_code= 50;
+int32 transfers_out= 51;
+double form= 52;
+double threat= 53;
+double value_season=54;
+double ict_index= 55;
+int32 penalties_saved= 56;  
 }
 
 message Teams {
@@ -90,16 +180,16 @@ message Teams {
 }
 
 message ColumnDefs {
-  optional string headerName = 1;
-  optional string field = 2;
-  optional string filter = 3;
+   string headerName = 1;
+   string field = 2;
+   string filter = 3;
   repeated string type = 4;
 }
 message ListOneTeam {
-  optional int32 id = 1;
+   int32 id = 1;
   message Response {
-    optional Team team = 1;
-    optional Team team_fixture = 2;
+     Team team = 1;
+     repeated Player players = 2;
   }
 }
 
@@ -109,4 +199,9 @@ message ListOneTeam {
       repeated Team team = 1;
     }
   }
+  message ListPlayers {
   
+    message Response {
+      repeated Player players = 1;
+    }
+  }

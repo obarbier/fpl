@@ -1,9 +1,10 @@
-from flask import Response, g
+from flask import Response, g , request
 from fplsupercharge.protos.apiServices_pb2 import (
     ApiServices,
     ListTeams,
     ListOneTeam, rpc)
 from fplsupercharge.utils.protosUtils import message_to_json
+from querystring_parser import parser
 
 
 def _listTeams():
@@ -15,9 +16,14 @@ def _listTeams():
     response.set_data(message_to_json(resp))
     return response
 
+
 def _listOneTeam():
-    listOneTeam =ListOneTeam()
-    return {}, 404
+    # listOneTeam = ListOneTeam()
+    query_string = request.query_string.decode("utf-8")
+    request_dict = parser.parse(query_string, normalized=True)
+    print(g.db.get_oneTeam(request_dict))
+    return {}, 200
+
 
 def _not_implemented():
     response = Response()
@@ -29,7 +35,7 @@ HANDLERS = {
     # Tracking Server APIs
     ListTeams: _listTeams,
     ListOneTeam: _listOneTeam
-    
+
 }
 
 

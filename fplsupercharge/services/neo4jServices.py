@@ -6,20 +6,28 @@ will store the data as needed
 """
 from neo4j import GraphDatabase
 from neo4j.exceptions import ServiceUnavailable, AuthError
-from fplsupercharge.utils.protosUtils import parse_dict
+from fplsupercharge.utils.protosUtils import dict_to_protobuf
 from fplsupercharge.protos.apiServices_pb2 import Team
 import typing
 __all__ = ["Datastore"]
 
 # TODO: add decorator to remove dependencies on proto message
+# TODO: allor protobuf to show default value
+
+def to_neopropreties(dict: typing.Dict):
+    # TODO: More usecase than just dict
+    if(len(dict) != 0):
+        return '{{ {} }}'.format(', '.join('{}: {}'.format(k, v)
+                                           for k, v in dict.items()))
 
 
 class Datastore:
     def __init__(self, uri, username, password, logger):
         try:
             self._logger = logger.getChild("neo4jservices")
+            # FIXME: understand ssl/encrypted better
             self._driver = GraphDatabase.driver(
-                uri=uri, auth=(username, password))
+                uri=uri, auth=(username, password), encrypted=False)
             logger.info("succesfully logged into: {} ".format(uri))
         except AuthError as ex:
             logger.error(
@@ -29,9 +37,25 @@ class Datastore:
     def close(self):
         self._driver.close()
 
+    def ready(self):
+        query = """
+        return "OK"
+        """
+        try:
+            self._logger.info("started ready operation")
+            with self._driver.session() as session:
+                result = session.run(query)
+                return result.single()
+            self._logger.info("successfully ready operation")
+        except ServiceUnavailable as exception:
+            self._logger.error("{query} raised an error: \n {exception}"
+                               .format(
+                                   query=query, exception=exception))
+            raise
+
     def deleteAll(self):
         query = """
-        MATCH ()-[p]-(n) delete p ,n
+        match (n)-[p]-(d) delete p,n,d
         """
         try:
             self._logger.info("started deleteAll operation")
@@ -84,13 +108,31 @@ class Datastore:
         self._logger.info("player_playsIn_team")
         query = """
         MATCH (a:Player),(b:Team) WHERE a.team = b.id
-        CREATE (a)-[r:playsIn]->(b)
+        CREATE (a)-[r:plays_for]->(b)
         """
         try:
             self._logger.info("started player_playsIn_team operation")
             with self._driver.session() as session:
                 session.run(query)
             self._logger.info("successfully player_playsIn_team operation")
+        except ServiceUnavailable as exception:
+            self._logger.error("{query} raised an error: \n {exception}"
+                               .format(
+                                   query=query, exception=exception))
+            raise
+
+    def create_fixture(self, fixture_info: typing.List = {}):
+        # properties = list(map(to_neopropreties, fixture_info))
+        query = """
+        UNWIND $fixture_info as fixture
+        MATCH (h:Team) , (a:Team) WHERE h.id = fixture.team_h and
+        a.id = fixture.team_a
+        MERGE (h)-[rel:Plays]->(a)
+        ON CREATE SET rel= fixture
+        """
+        try:
+            with self._driver.session() as session:
+                session.run(query, fixture_info=fixture_info)
         except ServiceUnavailable as exception:
             self._logger.error("{query} raised an error: \n {exception}"
                                .format(
@@ -175,34 +217,77 @@ class Datastore:
                                    query=query, exception=exception))
             raise
 
-    def get_teams(self) -> typing.List[Team]:
-        query = "Match (t:Team ) return t"
+    def get_teams(self):
+        # TODO: show blank week/ double week
+        # TODO: order by average 4 week difficulties
+        # FIXME: DYNAMIC gameweek
+        query = """
+        Match (h:Team)-[rel:Plays]-(a:Team)
+        where h.id <> a.id
+        and rel.event in [1,2,3,4]
+        return h as team_a,
+        avg(rel.event) as avg_diff,
+        collect(CASE h.id
+        when rel.team_a THEN {game_week_id:rel.event,opp:a.short_name,
+        diff: rel.team_a_difficulty}
+        ELSE {game_week_id:rel.event,opp:a.short_name,
+        diff: rel.team_h_difficulty}
+        END )
+        as fixture order by avg_diff
+        """
         try:
             self._logger.info("started map_user_picks operation")
             res = []
             with self._driver.session() as session:
                 result = session.run(query)
-                for record in result:
+                for idx, record in enumerate(result):
+                    teams, avg, fixtures = record.values()
                     team = Team()
-                    parse_dict(dict(zip(record.get('t').keys(),
-                                        record.get('t').values())),
-                               team)
+                    dict_info = dict(teams.items())
+                    dict_info['fixture'] = sorted(fixtures,
+                                                  key=lambda fixture: fixture['game_week_id'])
+                    dict_to_protobuf(dict_info, team)
                     res.append(team)
             return res
         except ServiceUnavailable as ex:
             self._logger.error("{query} raised an error: \n {exception}"
                                .format(
                                    query=query, exception=ex))
+            raise
 
-    def get_teamByID(self, id: int) -> None:
-        query = "Match p = (t:Team {id:$id} )-[]-() return p"
+    def get_oneTeam(self, dict):
+        query = """
+        Match (h:Team {prop})-[rel:Plays]-(a:Team)
+        where h.id <> a.id
+        return h as team_a,
+        collect(CASE h.id
+        when rel.team_a THEN {game_week_id:rel.event,opp:a.short_name,
+        diff: rel.team_a_difficulty}
+        ELSE {game_week_id:rel.event,opp:a.short_name,
+        diff: rel.team_h_difficulty}
+        END )
+        as fixture
+        """
+        properties = to_neopropreties(dict)
+        query = query.format(prop=properties)
+        print(query)
         try:
-            self._logger.info("started map_user_picks operation")
+            self._logger.info("Processing the data for team with id {}"
+                              .format(id))
+            res = []
             with self._driver.session() as session:
-                result = session.run(query, id=id)
+                tx = session.begin_transaction()
+                result = tx.run(query)
                 for record in result:
-                    print(record.get('p'))
+                    res.append(record.get('p'))
+                tx.commit()
+                tx.close()
+            return res
         except ServiceUnavailable as ex:
             self._logger.error("{query} raised an error: \n {exception}"
                                .format(
                                    query=query, exception=ex))
+            raise
+
+    def get_players(self):
+        raise NotImplementedError

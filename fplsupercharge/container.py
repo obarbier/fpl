@@ -34,7 +34,7 @@ class Waitress(containers.DeclarativeContainer):
 
 class Gunicorn(containers.DeclarativeContainer):
     """Adapters container."""
-    # FIXME
+    # TODO: DYNAMIC PORT based on config
     server = providers.Callable(build_gunicorn_command,
                                 logger=Core.logger,
                                 opts=None,
@@ -62,7 +62,13 @@ class ApplicationContainer(containers.DeclarativeContainer):
     app = flask.Application(Flask, __name__,
                             static_folder="js/build")
     db = flask.Extension(Services.neo4jServices)
+    logger = flask.Extension(Core.logger)
     endpoints = flask.Extension(get_endpoints)
+
+
+class GRPCApplicationConTainer(containers.DeclarativeContainer):
+    # TODO: Transform to using GRPC
+    pass
 
 
 class RunServer(containers.DeclarativeContainer):

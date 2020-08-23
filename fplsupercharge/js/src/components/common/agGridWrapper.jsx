@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {AgGridReact} from '@ag-grid-community/react';
-import {TeamCellRender} from './agGridFramework'
+import {TeamCellRender, FixtureCellRender} from './agGridFramework'
 import {ModuleRegistry} from '@ag-grid-community/core';
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
 import {CsvExportModule} from "@ag-grid-community/csv-export";
@@ -21,6 +21,7 @@ class AgGridWrapper extends Component {
             },
             frameworkComponents: {
                 teamCellRender: TeamCellRender,
+                fixtureCellRender:FixtureCellRender,
               },
             defaultColDef: {
                 width: 150,
