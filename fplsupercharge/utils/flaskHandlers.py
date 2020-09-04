@@ -1,9 +1,9 @@
 from flask import Response, g , request
-from fplsupercharge.protos.apiServices_pb2 import (
+from protos.apiServices_pb2 import (
     ApiServices,
     ListTeams,
     ListOneTeam, rpc)
-from fplsupercharge.utils.protosUtils import message_to_json
+from utils.protosUtils import message_to_json
 from querystring_parser import parser
 
 

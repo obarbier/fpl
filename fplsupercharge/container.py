@@ -8,13 +8,13 @@ from flask import Flask
 import kaptan
 
 # application module
-from fplsupercharge.utils.flaskHandlers import get_endpoints
-from fplsupercharge.utils.serverHandler import (build_gunicorn_command,
-                                                build_waitress_command,
-                                                exec_cmd)
-from fplsupercharge.services.neo4jServices import Datastore
-from fplsupercharge.services.fplRequestApiServices import FplRequestApiHandler
-from fplsupercharge.applications.datastore import intialDataload
+from utils.flaskHandlers import get_endpoints
+from utils.serverHandler import (build_gunicorn_command,
+                                 build_waitress_command,
+                                 exec_cmd)
+from services.neo4jServices import Datastore
+from services.fplRequestApiServices import FplRequestApiHandler
+from applications.datastore import intialDataload
 
 
 class Core(containers.DeclarativeContainer):
@@ -52,7 +52,8 @@ class Services(containers.DeclarativeContainer):
                                             key="init.dbname"),
                                         password=Core.config(
                                             key="init.dbpass"),
-                                        logger=Core.logger(name="neo4jServices"))
+                                        logger=Core.logger(
+                                            name="neo4jServices"))
 
     fplRequestApiServices = providers.Factory(FplRequestApiHandler,
                                               session=Core.fplSessionManager)

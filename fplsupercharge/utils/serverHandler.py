@@ -11,7 +11,7 @@ def build_waitress_command(opts, logger, host, port):
         "--host=%s" % host,
         "--port=%s" % port,
         "--ident=fplsupercharge",
-        "fplsupercharge.applications.flask:create_ui()"
+        "applications.flask:create_ui()"
     ]
 
 
@@ -25,7 +25,7 @@ def build_gunicorn_command(opts, logger, host, port, workers):
             bind_address,
             "-w",
             "%s" % workers,
-            "fplsupercharge.applications.flask:create_ui()"]
+            "applications.flask:create_ui()"]
 
 
 class ShellCommandException(Exception):

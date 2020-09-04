@@ -6,13 +6,13 @@ will store the data as needed
 """
 from neo4j import GraphDatabase
 from neo4j.exceptions import ServiceUnavailable, AuthError
-from fplsupercharge.utils.protosUtils import dict_to_protobuf
-from fplsupercharge.protos.apiServices_pb2 import Team
+from utils.protosUtils import dict_to_protobuf
+from protos.apiServices_pb2 import Team
 import typing
-__all__ = ["Datastore"]
 
 # TODO: add decorator to remove dependencies on proto message
 # TODO: allor protobuf to show default value
+
 
 def to_neopropreties(dict: typing.Dict):
     # TODO: More usecase than just dict

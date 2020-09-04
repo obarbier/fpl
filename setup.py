@@ -29,17 +29,16 @@ requirements = []
 
 
 setup_requirements = ["click>=7.0",
-                      "flask",
-                      "uplink>=0.9.1",
+                      "aiohttp==3.6.2",
+                      "dependency-injector==3.37.0",
+                      "Flask==1.1.2",
+                      "kaptan==0.5.12",
+                      "protobuf==3.13.0",
+                      "neomodel==3.3.2",
+                      "querystring-parser==1.2.4",
+                      "fpl==0.6.25",
                       "gunicorn==20.0.4",
-                      'waitress; platform_system == "Windows"',
-                      'gunicorn; platform_system != "Windows"',
-                      "protobuf==3.12.2",
-                      "scrapy==2.3.0",
-                      "protobuf==3.12.2",
-                      "fpl",
-                      "neo4j==4.1.0",
-                      "sanic_cors"
+                      "Flask-Cors==3.0.9"  # FIXME
                       ]
 test_requirements = ["tox==3.14.0",
                      "flake8==3.7.8"]

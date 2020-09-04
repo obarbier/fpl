@@ -24,14 +24,18 @@ message HttpEndpoint {
     repeated HttpEndpoint endpoints = 1;
   
   }
-  
-  
+
   // Note: 51310 is the beginning of the range of proto extension values for use by applications.
-  extend google.protobuf.MethodOptions {
-     RpcOptions rpc = 51310;
-  
+    extend google.protobuf.MethodOptions {
+      RpcOptions rpc = 51310;
+      
+   }
+   extend google.protobuf.MessageOptions {
+     Node node = 51234;
   }
-  
+  extend google.protobuf.FieldOptions {
+    Relationships relationship = 70000;
+  }
   service ApiServices {
   // list one Team informations
   rpc listOneTeams (ListOneTeam) returns (ListOneTeam.Response) {
@@ -64,27 +68,31 @@ message HttpEndpoint {
         };
     }
   }
-  
   message Node{
-    string identity =1;
-    repeated string labels = 2;
+    enum Label {
+      TEAM = 0;
+      PLAYER = 1;
+      USER = 2;
+      LEAGUE = 3;
+      HISTORY =4;
+      CURRENT = 5;
+    }
+    Label identity =1;
   }
   message Relationships{
+    enum Labels {
+      EMPTY = 0;
+      PLAYS_FOR = 1;
+      IN = 2;
+      PLAYS_AGAINST = 3;
+    }  
     string identity =1;
-    Node start =2;
-    Node end =3;
-    string type= 4;
+    Node.Label start =2;
+    Node.Label end =3;
+    Relationships.Labels labels= 4;
   }
 
-  message mapObjectInt{
-     string key =1;
-     int32 value = 2;
-  }
-
-  message difficulties{
-    map<string, int32> difficulties = 1;
-  }
-
+  // TODO FIXTURE as a node
   message Fixture{
     int32 diff= 1;
     string opp = 2;
@@ -92,10 +100,13 @@ message HttpEndpoint {
   }
 
   message Team {
+    option (node) = {
+      identity: TEAM
+    };
       int32 code = 1;
-      int32 draw = 2;
+      int32 draw = 2; 
       int32 form = 3;
-      int32 id   = 4;
+      int32 identity   = 4;
       int32 loss	= 5;
       string name = 6;
       int32 played = 7;
@@ -113,10 +124,18 @@ message HttpEndpoint {
       int32 strength_defence_home =19;
       int32 strength_defence_away = 20;
       int32 pulse_id	= 21;
-      repeated Fixture fixture = 22;
+      Relationships plays_for = 23 [(relationship) = {start:PLAYER, 
+                                                    end:TEAM,
+                                                    labels: PLAYS_FOR
+                                                  }];
+      
 }
 
 message Player{
+
+  option (node) = {
+    identity: PLAYER
+  };
 int32 own_goals = 1;
 int32 bonus= 2;
 int32 total_points=3;
@@ -126,7 +145,7 @@ int32 saves= 6;
 int32 transfers_in= 7;
 double value_form= 8;
 int32 now_cost= 9;
-int32 id= 10;
+// int32 id= 10;
 double creativity= 11;
 double influence_rank= 12;
 int32 goals_scored= 13;

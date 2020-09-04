@@ -3,8 +3,8 @@
 
 # third party import
 import fpl
-from fplsupercharge.utils.protosUtils import parse_dict
-from fplsupercharge.protos.apiServices_pb2 import Teams
+from utils.protosUtils import parse_dict
+from protos.apiServices_pb2 import Teams
 # local import
 
 

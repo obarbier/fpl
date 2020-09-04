@@ -5,9 +5,9 @@
 # from google.protobuf import message
 # from uplink import converters, returns, json
 # # local imports
-# from fplsupercharge.converter import json_options, helpers
-# from fplsupercharge.protos.apiServices_pb2 import Teams
-# from fplsupercharge.Utils import protosUtils
+# from converter import json_options, helpers
+# from protos.apiServices_pb2 import Teams
+# from Utils import protosUtils
 
 
 # class ProtobuffConverter(converters.Factory):
@@ -88,8 +88,3 @@
 #             # Return callable that can serialize Protobuf message.
 #             def converter(msg):
 #                 return msg.SerializeToString()
-
-from fplsupercharge.services.neo4jServices import Datastore
-import  logging
-db = Datastore(uri="bolt://0.0.0.0:7687",username="fpl", password="abcd", logger=logging.getLogger())
-print(db.get_oneTeamById(id=1))

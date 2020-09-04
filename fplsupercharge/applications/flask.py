@@ -1,5 +1,5 @@
 import os
-from fplsupercharge.container import ApplicationContainer
+from container import ApplicationContainer
 from flask import send_from_directory, g, Response
 from flask_cors import CORS
 
